@@ -6,8 +6,8 @@ import xbmcaddon
 
 __plugin__ = "steamlink"
 __author__ = "toast"
-__url__ = "-/"
-__git_url__ = "-"
+__url__ = "https://github.com/swetoast/steamlink-launcher/"
+__git_url__ = "https://github.com/swetoast/steamlink-launcher/"
 __credits__ = "toast"
 __version__ = "0.0.1"
 
