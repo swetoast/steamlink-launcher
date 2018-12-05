@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.program.steamlink" name="Steamlink" version="0.0.1" provider-name="Toast">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="addon.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <language/>
+        <platform>linux</platform>
+        <disclaimer>Beta</disclaimer>
+        <summary lang="en">Launch Steamlink from Kodi.</summary>
+        <description lang="en">Play your Steam games on any TV in the house with Steam Link. Setup is easy. Just connect your Steam Link to your TV and home network, where it will automatically discover any computer running Steam. Then grab a controller and play your collection of games from the comfort of your couch. </description>
+        <website></website>
+        <email>na@na.na</email>
+    </extension>
+</addon>
