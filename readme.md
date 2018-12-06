@@ -12,8 +12,8 @@ This is a laucher only for OSMC, the launcher installs two scripts that run and 
 
 Here is a full list of people that helped out on this project
 
-* ludeeus - code clean up
-* slouken - for adding lib replacement for OSMC
+* [Ludeeus](https://github.com/ludeeus) - code clean up
+* [Slouken](https://github.com/slouken) - for adding lib replacement for OSMC
 
 ## Want to contribute
 
