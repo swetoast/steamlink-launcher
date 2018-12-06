@@ -26,3 +26,7 @@ Here is a full list of people that helped out on this project
 * ludeeus - code clean up
 
 * slouken - for adding lib replacement for OSMC
+
+## Want to contribute
+
+Make sure to lint your code so its proper then submit it via PR here on the tracker.
