@@ -5,9 +5,7 @@ This is a laucher only for OSMC, the launcher installs two scripts that run and 
 ## Installation
 
 * log into ssh on your OSMC installation 
-
 *  download the debian package and [install it](https://steamcommunity.com/app/353380/discussions/0/1743353164093954254)
-
 * download the zip of the launcher and install it via kodi
 
 ## Acknowledgement
