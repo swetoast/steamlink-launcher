@@ -30,3 +30,9 @@ Here is a full list of people that helped out on this project
 ## Want to contribute
 
 Make sure to lint your code so its proper then submit it via PR here on the tracker.
+
+# Links
+
+* [Valve Forums](https://steamcommunity.com/app/353380/discussions/6/)
+
+* [OSMC Forums](https://discourse.osmc.tv/t/regarding-steamlink/76800)
