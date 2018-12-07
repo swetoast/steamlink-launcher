@@ -17,10 +17,10 @@ addon = xbmcaddon.Addon(id='plugin.program.steamlink')
 def main():
     """Main operations of this plugin."""
     if os.path.isfile("/tmp/steamlink-launcher.sh"):
-        output = os.popen("/tmp/steamlink-launcher.sh").read()
+        output = os.popen("sh /tmp/steamlink-launcher.sh").read()
     else:
         create_files()
-        output = os.popen("/tmp/steamlink-launcher.sh").read()
+        output = os.popen("sh /tmp/steamlink-launcher.sh").read()
     dialog.ok("Starting Steamlink", output)
     #print output
 
