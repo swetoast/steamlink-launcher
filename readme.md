@@ -28,7 +28,7 @@ registered trademarks of Valve Corporation in the US and other countries.
 
 Steamlink Launcher is licensed under GPL2
 
-# Links
+## Links
 
 * [Valve Forums](https://steamcommunity.com/app/353380/discussions/6/)
 * [OSMC Forums](https://discourse.osmc.tv/t/regarding-steamlink/76800)
