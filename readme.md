@@ -1,4 +1,4 @@
-# Steamlink launcher for OSMC
+# Steamlink Launcher for OSMC
 
 This is a laucher only for OSMC, the launcher installs two scripts that run and handles Steamlink remember this is all beta so report performance issues to Valve and launcher issues here, i will not handle performance issues at all will refer to Valve for that.
 
