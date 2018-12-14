@@ -9,7 +9,7 @@ __author__ = "toast"
 __url__ = "https://github.com/swetoast/steamlink-launcher/"
 __git_url__ = "https://github.com/swetoast/steamlink-launcher/"
 __credits__ = "toast"
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 dialog = xbmcgui.Dialog()
 addon = xbmcaddon.Addon(id='plugin.program.steamlink')
@@ -29,7 +29,7 @@ def create_files():
     with open('/tmp/steamlink-launcher.sh', 'w') as outfile:
         outfile.write('#!/bin/bash\n'
                       'sudo openvt -c 7 -s -f clear\n'
-                      'sudo su osmc -c "sh /tmp/steamlink_watchdog.sh &" &\n'
+                      'sudo su osmc -c "sh /tmp/steamlink-watchdog.sh &" &\n'
                       'sudo chown osmc:osmc /usr/bin/steamlink\n'
                       'sudo su osmc -c "nohup openvt -c 7 -f -s steamlink >/dev/null 2>&1 &" &\n'
                       'sudo openvt -c 7 -s -f clear\n'
