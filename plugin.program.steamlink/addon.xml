@@ -8,7 +8,7 @@
     </extension>
     <extension point="xbmc.addon.metadata">
         <language/>
-        <platform>linux</platform>
+        <platform>OSMC</platform>
         <disclaimer>Beta</disclaimer>
         <summary lang="en">Launch Steamlink from Kodi.</summary>
         <description lang="en">Play your Steam games on any TV in the house with Steam Link. Setup is easy. Just connect your Steam Link to your TV and home network, where it will automatically discover any computer running Steam. Then grab a controller and play your collection of games from the comfort of your couch. </description>
