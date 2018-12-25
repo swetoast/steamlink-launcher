@@ -1,18 +1,34 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.steamlink" name="Steamlink" version="0.0.3" provider-name="Toast">
-    <requires>
-        <import addon="xbmc.python" version="2.1.0"/>
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="addon.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <language/>
-        <platform>OSMC</platform>
-        <disclaimer>Beta Version for testing.</disclaimer>
-        <summary lang="en">Launch Steamlink from Kodi.</summary>
-        <description lang="en">Play your Steam games on any TV in the house with Steam Link. Setup is easy. Just connect your Steam Link to your TV and home network, where it will automatically discover any computer running Steam. Then grab a controller and play your collection of games from the comfort of your couch. </description>
-        <website></website>
-        <email><email>
-    </extension>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.program.steamlink" name="Steamlink Launcher" version="0.0.4" provider-name="Toast">
+  <requires>
+    <import addon="xbmc.python" version="2.25.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="addon.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Your add-on's summary</summary>
+    <description lang="en_GB">Your add-on's description</description>
+    <disclaimer lang="en_GB"></disclaimer>
+    <language>en</language> <!-- the language of the videos the plugin provides, may be left blank -->
+    <platform>linux</platform>
+    <license>GPL-2.0</license>
+    <forum></forum> <!-- may be left blank  -->
+    <website></website> <!-- the url of the website that contains the videos (or the official website of your plugin).  -->
+    <email></email> <!-- may be left blank  -->
+    <source>https://github.com/swetoast/steamlink-launcher</source>
+    <news>
+      0.0.1 Initial steamlink launcher (tnx @Ludeeus for cleaning up my code)
+      0.0.2 Bugfixes
+      0.0.3 Additional Bugfixes
+      0.0.4 Addon zip fixes
+    </news>
+    <assets>
+        <icon>resources/icon.png</icon>
+        <fanart>resources/fanart.jpg</fanart>
+        <banner>resources/banner.png</banner>
+        <clearlogo>resources/clearlogo.png</clearlogo>
+        <screenshot>resources/screenshot.png</screenshot>
+    </assets>
+  </extension>
 </addon>
