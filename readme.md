@@ -10,14 +10,6 @@ This is a laucher only for Open Source Mediacenter (OSMC), the launcher installs
 * download the debian package and [install it](https://steamcommunity.com/app/353380/discussions/0/1743353164093954254)
 * download the [zip](https://github.com/swetoast/steamlink-launcher/releases) of the launcher and install it via Kodi
 
-## Credits
-
-Here is a full list of people that helped out on this project
-
-* [Ludeeus](https://github.com/ludeeus) - code clean up
-* [Slouken](https://github.com/slouken) - for adding lib replacement for OSMC
-* [sgroen88](https://github.com/sgroen88) - adding shell execution to the script
-
 ## Want to contribute
 
 Make sure to lint your code so its proper then submit it via PR here on the tracker.
@@ -26,6 +18,14 @@ Make sure to lint your code so its proper then submit it via PR here on the trac
 
 © 2016 Valve Corporation. All rights reserved. Valve, Steam Link and Steam are trademarks and/or 
 registered trademarks of Valve Corporation in the US and other countries. 
+
+## Credits
+
+Here is a full list of people that helped out on this project
+
+* [Ludeeus](https://github.com/ludeeus) - code clean up
+* [Slouken](https://github.com/slouken) - for adding lib replacement for OSMC
+* [sgroen88](https://github.com/sgroen88) - adding shell execution to the script
 
 ## License
 
