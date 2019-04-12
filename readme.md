@@ -1,4 +1,7 @@
-[![Version](https://img.shields.io/badge/version-0.0.4-green.svg?style=for-the-badge)](#) [![mantained](https://img.shields.io/maintenance/yes/2019.svg?style=for-the-badge)](#) [![maintainer](https://img.shields.io/badge/maintainer-swetoast-blue.svg?style=for-the-badge)](#)
+[![GitHub Release][releases-shield]][releases]
+[![License][license-shield]](LICENSE.md) 
+![Project Maintenance][maintenance-shield1]
+[![Contributors][contributors-shield]][contributors]
 
 # Steamlink Launcher for OSMC
 
@@ -35,3 +38,10 @@ Steamlink Launcher is licensed under GPL2
 
 * [Valve Forums](https://steamcommunity.com/app/353380/discussions/6/)
 * [OSMC Forums](https://discourse.osmc.tv/t/regarding-steamlink/76800)
+
+[contributors-shield]: https://img.shields.io/github/contributors/swetoast/steamlink-launcher.svg?style=for-the-badge
+[contributors]: https://github.com/swetoast/steamlink-launcher/graphs/contributors/
+[license-shield]: https://img.shields.io/github/license/swetoast/steamlink-launcher.svg?style=for-the-badge
+[maintenance-shield1]: https://img.shields.io/badge/maintainer-Toast%20%40swetoast-blue.svg?style=for-the-badge
+[releases-shield]: https://img.shields.io/github/release/swetoast/steamlink-launcher.svg?style=for-the-badge
+[releases]: https://github.com/swetoast/steamlink-launcher/releasess
