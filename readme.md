@@ -1,5 +1,5 @@
 [![GitHub Release][releases-shield]][releases]
-[![License][license-shield]](LICENSE.md) 
+[![GPL license](https://img.shields.io/badge/License-GPL-blue.svg?style=for-the-badge)](LICENSE.md)
 ![Project Maintenance][maintenance-shield1]
 [![Contributors][contributors-shield]][contributors]
 
