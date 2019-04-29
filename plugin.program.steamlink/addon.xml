@@ -14,7 +14,7 @@
     <platform>linux</platform>
     <license>GPL-2.0</license>
     <forum></forum> <!-- may be left blank  -->
-    <website></website> <!-- the url of the website that contains the videos (or the official website of your plugin).  -->
+    <website>https://github.com/swetoast/steamlink-launcher/</website> <!-- the url of the website that contains the videos (or the official website of your plugin).  -->
     <email></email> <!-- may be left blank  -->
     <source>https://github.com/swetoast/steamlink-launcher</source>
     <news>
