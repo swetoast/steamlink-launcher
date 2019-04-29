@@ -7,7 +7,7 @@
     <provides>executable</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en_GB">Your add-on's summary</summary>
+    <summary lang="en_GB">Steamlink for Kodi</summary>
     <description lang="en_GB">Your add-on's description</description>
     <disclaimer lang="en_GB"></disclaimer>
     <language>en</language> <!-- the language of the videos the plugin provides, may be left blank -->
