@@ -2,7 +2,7 @@
 [![GPL license](https://img.shields.io/badge/License-GPL-blue.svg?style=for-the-badge)](LICENSE.md)
 ![Project Maintenance][maintenance-shield1]
 [![Contributors][contributors-shield]][contributors]
-
+<a href="https://liberapay.com/Toast/donate"><img alt="Donate using Liberapay" align="right" align="top" src="https://liberapay.com/assets/widgets/donate.svg"></a>
 # Steamlink Launcher for OSMC
 
 This is a laucher only for Open Source Mediacenter (OSMC), the launcher installs two scripts that run and handles Steamlink remember this is all beta so report performance issues to Valve and launcher issues here, i will not handle performance issues at all will refer to Valve for that.
