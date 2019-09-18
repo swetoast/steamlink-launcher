@@ -44,4 +44,4 @@ Steamlink Launcher is licensed under GPL2
 [license-shield]: https://img.shields.io/github/license/swetoast/steamlink-launcher.svg?style=for-the-badge
 [maintenance-shield1]: https://img.shields.io/badge/maintainer-Toast%20%40swetoast-blue.svg?style=for-the-badge
 [releases-shield]: https://img.shields.io/github/release/swetoast/steamlink-launcher.svg?style=for-the-badge
-[releases]: https://github.com/swetoast/steamlink-launcher/releasess
+[releases]: https://github.com/swetoast/steamlink-launcher/releases
