@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.steamlink" name="Steamlink Launcher" version="0.0.4" provider-name="Toast">
+<addon id="plugin.program.steamlink" name="Steamlink Launcher" version="0.0.5" provider-name="Toast">
   <requires>
     <import addon="xbmc.python" version="2.25.0"/>
   </requires>
@@ -21,6 +21,7 @@
       0.0.1 Initial steamlink launcher (tnx @Ludeeus for cleaning up my code)
       0.0.2 Bugfixes
       0.0.3 Additional Bugfixes
+      0.0.4 Addon zip fixes
       0.0.4 Addon zip fixes
     </news>
     <assets>
