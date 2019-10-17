@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.steamlink" name="Steamlink Launcher" version="0.0.5" provider-name="Toast">
+<addon id="plugin.program.steamlink" name="Steamlink Launcher" version="0.0.6" provider-name="Toast">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
   </requires>
@@ -18,11 +18,7 @@
     <email></email> <!-- may be left blank  -->
     <source>https://github.com/swetoast/steamlink-launcher</source>
     <news>
-      0.0.1 Initial steamlink launcher (tnx @Ludeeus for cleaning up my code)
-      0.0.2 Bugfixes
-      0.0.3 Additional Bugfixes
-      0.0.4 Addon zip fixes
-      0.0.4 Addon zip fixes
+      Updated with Kodi Matrix compabiltity (Version 19)
     </news>
     <assets>
         <icon>resources/icon.png</icon>
