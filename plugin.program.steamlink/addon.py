@@ -29,6 +29,7 @@ def create_files():
     with open('/tmp/steamlink-launcher.sh', 'w') as outfile:
         outfile.write('#!/bin/bash\n'
                       'sudo openvt -c 7 -s -f clear\n'
+                      'sudo usermod -a -G input osmc\n'
                       'sudo su osmc -c "sh /tmp/steamlink-watchdog.sh &" &\n'
                       'sudo chown osmc:osmc /usr/bin/steamlink\n'
                       'sudo su osmc -c "nohup openvt -c 7 -f -s steamlink >/dev/null 2>&1 &" &\n'
