@@ -9,7 +9,7 @@ __author__ = "toast"
 __url__ = "https://github.com/swetoast/steamlink-launcher/"
 __git_url__ = "https://github.com/swetoast/steamlink-launcher/"
 __credits__ = "toast"
-__version__ = "0.0.6"
+__version__ = "0.0.7"
 
 dialog = xbmcgui.Dialog()
 addon = xbmcaddon.Addon(id='plugin.program.steamlink')
@@ -23,34 +23,55 @@ def main():
         output = os.popen("sh /tmp/steamlink-launcher.sh").read()
     dialog.ok("Starting Steamlink", output)
     #print output
-
 def create_files():
     """Creates bash files to be used for this plugin."""
     with open('/tmp/steamlink-launcher.sh', 'w') as outfile:
-        outfile.write('#!/bin/bash\n'
-                      'USER=$(whoami)\n'
-                      'sudo openvt -c 7 -s -f clear\n'
-                      'sudo usermod -a -G input,plugdev $USER\n'
-                      'sudo su - $USER -c "sh /tmp/steamlink-watchdog.sh &" &\n'
-                      'sudo chown $USER:$USER $(which steamlink)\n'
-                      'sudo su - $USER -c "nohup openvt -c 7 -f -s steamlink >/dev/null 2>&1 &" &\n'
-                      'sudo openvt -c 7 -s -f clear\n'
-                      'sudo "systemctl stop mediacenter &" &\n'
-                      'exit')
+        outfile.write('#!/bin/sh\n'
+                    'start_steamlink () {\n'
+                    'sh /tmp/steamlink-watchdog.sh &\n'
+                    'if [ -f "openvt" ]\n'
+                    'then openvt -c 7 -s -f clear\n'
+                    'openvt -c 7 -f -s steamlink > /dev/null 2> &1\n'
+                    'systemctl stop mediacenter\n'
+                    'else systemctl stop kodi && /storage/steamlink\n'
+                    '}\n'
+                    'install_steam () {\n'
+                    'kodi-send --host=127.0.0.1 --action=Notification(Downloading,Downloading Steamlink, Please wait.....[,15000])\n'
+                    'mkdir /storage\n'
+                    'chown $USER /storage\n'
+                    'if [ $(cat /etc/os-release | grep OSMC | vc - l) -eq 1 ]\n'
+                    'then apt-get install packages\n'
+                    'else wget blah -O /storage/lib.zip\n'
+                    'rm /storage/lib.zip\n'
+                    'mkdir /storage/steamlink/overlay_work\n'
+                    'mkdir /storage/.config/system.d/\n'
+                    'wget url -O /storage/.config/system.d/storage-steamlinkudev-rules.d.mount\n'
+                    'if [ ! -f /lib/udev/rules.d/60-steam-input.rules ]; then\n'
+                    'mount -t overlay overlay -o lowerdir=/lib/udev/rules.d,upperdir=/storage/steamlink/udev/rules.d/,workdir=/storage/steamlink/overlay_work /lib/udev/rules.d\n'
+                    'udevadm trigger; fi\n'
+                    'systemctl enable storage-steamlink-udev-rules.d.mount; fi\n'
+                    'kodi-send --host=127.0.0.1 --action=Notification(Downloading,Downloading Steamlink Libraries, Please wait....[,15000])\n'
+                    'wget "$(wget -q -O - http://media.steampowered.com/steamlink/rpi/public_build.txt)" -O /storage/steamlink.tar.gz\n'
+                    'tar -zxf steamlink.tar.gz\n'
+                    'rm steamlink.tar.gz\n'
+                    'chown $USER /storage/steamlink\n'
+                    'chmod +x $USER /storage/steamlink\n'
+                    'usermod -a -G input,plugdev $USER\n'
+                    'start_steamlink\n'
+                    '}\n'
+                    'if [ ! -f "/storage/steamlink" ]; then install_steamlink; else start_steamlink; fi')
         outfile.close()
     with open('/tmp/steamlink-watchdog.sh', 'w') as outfile:
-        outfile.write('#!/bin/bash\n'
-                      'if [ "$HYPERIONFIX" = 1 ]; then if [ "$(pgrep hyperion)" ]; '
-                      'then sudo service hyperion stop; fi; fi\n'
-                      'sleep 8\n'
-                      'if [ "$HYPERIONFIX" = 1 ]; then if [ ! "$(pgrep hyperion)" ]; then '
-                      'sudo service hyperion start; fi; fi\n'
-                      'while true; do VAR1="$(pgrep steamlink)"; if [ ! "$VAR1" ]; then\n'
-                      'sudo openvt -c 7 -s -f clear\n'
-                      '"sudo systemctl restart mediacenter &" &\n'
-                      'exit\n'
-                      'fi\n'
-                      'done\n'
-                      'exit')
+        outfile.write('#!/bin/sh\n'
+                    'if [ "$(pgrep hyperion | wc -l)" -eq 1 ]\n'
+                    'then systemctl restart hyperion; fi\n'
+                    'while true\n'
+                    'do STEAMCHECK="$(pgrep steamlink)"\n'
+                    'if [ ! "$STEAMCHECK" ]\n'
+                    'if [ -f "openvt" ]\n'
+                    'then openvt -c 7 -s -f clear\n'
+                    'systemctl start mediacenter; fi\n'
+                    'else systemctl start kodi\n'
+                    'done')
         outfile.close()
 main()
