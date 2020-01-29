@@ -29,12 +29,12 @@ def create_files():
     with open('/tmp/steamlink-launcher.sh', 'w') as outfile:
         outfile.write('#!/bin/bash\n'
                       'sudo openvt -c 7 -s -f clear\n'
-                      'sudo usermod -a -G input osmc\n'
+                      'sudo cp /home/osmc/.local/share/SteamLink/udev/rules.d/55-steamlink.rules /lib/udev/rules.d/55-steamlink.rules && sudo udevadm trigger && sudo usermod -a -G input,plugdev osmc\n'
                       'sudo su osmc -c "sh /tmp/steamlink-watchdog.sh &" &\n'
-                      'sudo chown osmc:osmc /usr/bin/steamlink\n'
+                      'sudo chown osmc:osmc $(which steamlink)\n'
                       'sudo su osmc -c "nohup openvt -c 7 -f -s steamlink >/dev/null 2>&1 &" &\n'
                       'sudo openvt -c 7 -s -f clear\n'
-                      'sleep 0.5; sudo su -c "systemctl stop mediacenter &" &\n'
+                      'sudo su -c "systemctl stop mediacenter &" &\n'
                       'exit')
         outfile.close()
     with open('/tmp/steamlink-watchdog.sh', 'w') as outfile:
@@ -48,7 +48,7 @@ def create_files():
                       'sudo openvt -c 7 -s -f clear; sudo su -c '
                       '"sudo systemctl restart mediacenter &" &\n'
                       'exit\n'
-                      'else sleep 2; fi\n'
+                      'fi\n'
                       'done\n'
                       'exit')
         outfile.close()
