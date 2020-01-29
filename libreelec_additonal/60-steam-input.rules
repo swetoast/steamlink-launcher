@@ -1,0 +1,12 @@
+[Unit]
+Description=udev rules overlay
+DefaultDependencies=no
+Before=umount.target
+After=systemd-udevd.service
+[Mount]
+What=overlay
+Where=/storage/steamlink/udev/rules.d
+Type=overlay
+Options=lowerdir=/lib/udev/rules.d,upperdir=/storage/steamlink/udev/rules.d/,workdir=/storage/steamlink/overlay_work
+[Install]
+WantedBy=local-fs.target
