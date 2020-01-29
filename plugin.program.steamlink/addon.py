@@ -28,13 +28,14 @@ def create_files():
     """Creates bash files to be used for this plugin."""
     with open('/tmp/steamlink-launcher.sh', 'w') as outfile:
         outfile.write('#!/bin/bash\n'
+                      'USER=$(whoami)\n'
                       'sudo openvt -c 7 -s -f clear\n'
-                      'sudo cp /home/osmc/.local/share/SteamLink/udev/rules.d/55-steamlink.rules /lib/udev/rules.d/55-steamlink.rules && sudo udevadm trigger && sudo usermod -a -G input,plugdev osmc\n'
-                      'sudo su - osmc -c "sh /tmp/steamlink-watchdog.sh &" &\n'
-                      'sudo chown osmc:osmc $(which steamlink)\n'
-                      'sudo su - osmc -c "nohup openvt -c 7 -f -s steamlink >/dev/null 2>&1 &" &\n'
+                      'sudo usermod -a -G input,plugdev $USER\n'
+                      'sudo su - $USER -c "sh /tmp/steamlink-watchdog.sh &" &\n'
+                      'sudo chown $USER:$USER $(which steamlink)\n'
+                      'sudo su - $USER -c "nohup openvt -c 7 -f -s steamlink >/dev/null 2>&1 &" &\n'
                       'sudo openvt -c 7 -s -f clear\n'
-                      'sudo su -c "systemctl stop mediacenter &" &\n'
+                      'sudo "systemctl stop mediacenter &" &\n'
                       'exit')
         outfile.close()
     with open('/tmp/steamlink-watchdog.sh', 'w') as outfile:
@@ -45,7 +46,7 @@ def create_files():
                       'if [ "$HYPERIONFIX" = 1 ]; then if [ ! "$(pgrep hyperion)" ]; then '
                       'sudo service hyperion start; fi; fi\n'
                       'while true; do VAR1="$(pgrep steamlink)"; if [ ! "$VAR1" ]; then\n'
-                      'sudo openvt -c 7 -s -f clear; sudo su -c '
+                      'sudo openvt -c 7 -s -f clear\n'
                       '"sudo systemctl restart mediacenter &" &\n'
                       'exit\n'
                       'fi\n'
