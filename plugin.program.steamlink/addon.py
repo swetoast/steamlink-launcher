@@ -16,41 +16,46 @@ addon = xbmcaddon.Addon(id='plugin.program.steamlink')
 
 def main():
     """Main operations of this plugin."""
-    if os.path.isfile("/tmp/steamlink-launcher.sh"):
-        output = os.popen("sh /tmp/steamlink-launcher.sh").read()
-    else:
-        create_files()
-        output = os.popen("sh /tmp/steamlink-launcher.sh").read()
-    dialog.ok("Starting Steamlink", output)
-    #print output
+    create_files()
+    output = os.popen("sh /tmp/steamlink-launcher.sh").read()
+    dialog.ok("Starting Steamlink...", output)
 
 def create_files():
     """Creates bash files to be used for this plugin."""
     with open('/tmp/steamlink-launcher.sh', 'w') as outfile:
-        outfile.write('#!/bin/bash\n'
-                      'USER=$(whoami)\n'
-                      'sudo openvt -c 7 -s -f clear\n'
-                      'sudo usermod -a -G input,plugdev $USER\n'
-                      'sudo su - $USER -c "sh /tmp/steamlink-watchdog.sh &" &\n'
-                      'sudo chown $USER:$USER $(which steamlink)\n'
-                      'sudo su - $USER -c "nohup openvt -c 7 -f -s steamlink >/dev/null 2>&1 &" &\n'
-                      'sudo openvt -c 7 -s -f clear\n'
-                      'sudo "systemctl stop mediacenter &" &\n'
-                      'exit')
+        outfile.write("""#!/bin/bash
+chmod 755 /tmp/steamlink-watchdog.sh
+sudo openvt -c 7 -s -f clear
+sudo su -c "nohup sudo openvt -c 7 -s -f -l /tmp/steamlink-watchdog.sh >/dev/null 2>&1 &"
+""")
         outfile.close()
     with open('/tmp/steamlink-watchdog.sh', 'w') as outfile:
-        outfile.write('#!/bin/bash\n'
-                      'if [ "$HYPERIONFIX" = 1 ]; then if [ "$(pgrep hyperion)" ]; '
-                      'then sudo service hyperion stop; fi; fi\n'
-                      'sleep 8\n'
-                      'if [ "$HYPERIONFIX" = 1 ]; then if [ ! "$(pgrep hyperion)" ]; then '
-                      'sudo service hyperion start; fi; fi\n'
-                      'while true; do VAR1="$(pgrep steamlink)"; if [ ! "$VAR1" ]; then\n'
-                      'sudo openvt -c 7 -s -f clear\n'
-                      '"sudo systemctl restart mediacenter &" &\n'
-                      'exit\n'
-                      'fi\n'
-                      'done\n'
-                      'exit')
+        outfile.write("""#!/bin/bash
+# Shut down the graphical interface
+systemctl stop mediacenter
+
+# Restart hyperion service
+if [ "$HYPERIONFIX" = 1 ]; then
+    if [ "$(pgrep hyperion)" ]; then
+        service hyperion stop
+    fi
+    sleep 8
+    if [ ! "$(pgrep hyperion)" ]; then 
+        service hyperion start
+    fi
+fi
+
+# Install and run Steam Link
+if [ "$(which steamlink)" = "" ]; then
+    curl -o /tmp/steamlink.deb -#Of http://media.steampowered.com/steamlink/rpi/steamlink.deb
+    dpkg -i /tmp/steamlink.deb
+    rm -f /tmp/steamlink.deb
+fi
+sudo -u osmc steamlink
+
+# Restart the graphical interface
+openvt -c 7 -s -f clear
+systemctl start mediacenter
+""")
         outfile.close()
 main()
