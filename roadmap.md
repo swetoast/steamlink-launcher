@@ -1,13 +1,5 @@
 Roadmap for upcoming versions
-  ```python 
-import platform
-if platform.release() == "osmc":
-    OSMC SETUP
-else:
-    LIBRE SETUP
-  ```  
-  to detect platform
-  
+* create download package for missing libs under libre
 * create libreelec setup
 * create osmc setup
 
