@@ -25,6 +25,7 @@ def create_files():
 with open('/tmp/steamlink-launcher.sh', 'w') as outfile:
 outfile.write("""#!/bin/sh
 # installation part
+
 install_on_libre () {
 kodi-send --action="Notification(Installing Steamlink, Please wait while installing Steamlink and packages,1500)"
    mkdir -p /storage/steamlink
@@ -45,6 +46,7 @@ wget "$(wget -q -O - http://media.steampowered.com/steamlink/rpi/public_build.tx
    usermod -a -G input,plugdev root
 start_steamlink
 }
+
 install_on_osmc () {
 if [ "$(id -u)" != "0" ]; then exec /usr/bin/sudo /bin/bash "$0"; fi # root check
 kodi-send --action="Notification(Installing Steamlink, Please wait while installing Steamlink and packages,1500)"
@@ -56,12 +58,14 @@ wget http://media.steampowered.com/steamlink/rpi/steamlink.deb -O /tmp/steamlink
    sudo -u osmc steamlink
 start_steamlink
 }
+
 install_on_os () {
 if [ "$(cat "/etc/os-release" | grep "OSMC" | wc - l)" -eq 1 ]
    then install_on_osmc
    else install_on_libre
 fi
 }
+
 # watchdog part
 watchdog_osmc () {
 if [ "$(id -u)" != "0" ]; then exec /usr/bin/sudo /bin/bash "$0"; fi # root check
@@ -74,6 +78,7 @@ sudo -u osmc steamlink
 openvt -c 7 -s -f clear
 systemctl start mediacenter
 }
+
 watchdog_libre () {
 systemctl stop kodi
 if [ "$HYPERIONFIX" = 1 ]; then
@@ -84,15 +89,18 @@ systemctl stop kodi
 /storage/steamlink/steamlink &> /storage/steamlink/steamlink.log >/dev/null 2>&1 &
 systemctl start kodi
 }
+
 start_steamlink () {
 if [ "$(cat "/etc/os-release" | grep "OSMC" | wc - l)" -eq 1 ]
    then watchdog_osmc
    else watchdog_libre
 fi
 }
+
 detect_steamlink () {
 if [ "$(which steamlink)" -eq "1" ]; then start_steamlink ; else install_on_os; fi
 }
+
 os_detection () {
 if [ "$(cat "/etc/os-release" | grep "OSMC" | wc - l)" -eq 1 ]
    then detect_steamlink
