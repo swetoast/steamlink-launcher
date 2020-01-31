@@ -69,14 +69,14 @@ fi
 # watchdog part
 watchdog_osmc () {
 if [ "$(id -u)" != "0" ]; then exec /usr/bin/sudo /bin/bash "$0"; fi # root check
-systemctl stop mediacenter
+sudo systemctl stop mediacenter
 if [ "$HYPERIONFIX" = 1 ]; then
    if [ "$(pgrep hyperion)" ]; then systemctl stop hyperion; fi
    if [ ! "$(pgrep hyperion)" ]; then systemctl start hyperion; fi
 fi
 sudo -u osmc steamlink
-openvt -c 7 -s -f clear
-systemctl start mediacenter
+sudo openvt -c 7 -s -f clear
+sudo systemctl start mediacenter
 }
 
 watchdog_libre () {
