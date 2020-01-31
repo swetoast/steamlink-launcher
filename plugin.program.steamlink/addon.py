@@ -42,6 +42,29 @@ if [ "$(cat "/etc/os-release" | grep "OSMC" | wc - l)" -eq 1 ]
 fi
 }
 
+watchdog_osmc () {
+if [ "$(id -u)" != "0" ]; then exec /usr/bin/sudo /bin/bash "$0"; fi # root check
+systemctl stop mediacenter
+if [ "$HYPERIONFIX" = 1 ]; then
+   if [ "$(pgrep hyperion)" ]; then systemctl stop hyperion; fi
+   if [ ! "$(pgrep hyperion)" ]; then systemctl start hyperion; fi
+fi
+sudo -u osmc steamlink
+openvt -c 7 -s -f clear
+systemctl start mediacenter
+}
+
+watchdog_libre () {
+systemctl stop kodi
+if [ "$HYPERIONFIX" = 1 ]; then
+   if [ "$(pgrep hyperion)" ]; then systemctl stop hyperion; fi
+   if [ ! "$(pgrep hyperion)" ]; then systemctl start hyperion; fi
+fi
+systemctl stop kodi
+/storage/steamlink/steamlink &> /storage/steamlink/steamlink.log >/dev/null 2>&1 &
+systemctl start kodi
+}
+
 start_steamlink () {
 if [ "$(cat "/etc/os-release" | grep "OSMC" | wc - l)" -eq 1 ]
    then watchdog_osmc
@@ -82,28 +105,7 @@ wget http://media.steampowered.com/steamlink/rpi/steamlink.deb -O /tmp/steamlink
 start_steamlink
 }
 
-watchdog_osmc () {
-if [ "$(id -u)" != "0" ]; then exec /usr/bin/sudo /bin/bash "$0"; fi # root check
-systemctl stop mediacenter
-if [ "$HYPERIONFIX" = 1 ]; then
-   if [ "$(pgrep hyperion)" ]; then systemctl stop hyperion; fi
-   if [ ! "$(pgrep hyperion)" ]; then systemctl start hyperion; fi
-fi
-sudo -u osmc steamlink
-openvt -c 7 -s -f clear
-systemctl start mediacenter
-}
-
-watchdog_libre () {
-systemctl stop kodi
-if [ "$HYPERIONFIX" = 1 ]; then
-   if [ "$(pgrep hyperion)" ]; then systemctl stop hyperion; fi
-   if [ ! "$(pgrep hyperion)" ]; then systemctl start hyperion; fi
-fi
-systemctl stop kodi
-/storage/steamlink/steamlink &> /storage/steamlink/steamlink.log >/dev/null 2>&1 &
-systemctl start kodi
-}
+os_detection
 """)
         outfile.close()
 main()
