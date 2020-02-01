@@ -18,6 +18,8 @@
     <email></email> <!-- may be left blank  -->
     <source>https://github.com/swetoast/steamlink-launcher</source>
     <news>
+      Added support for Libreelec
+      Automatic installation for Platforms
       Updated with Kodi Matrix compabiltity (Version 19)
     </news>
     <assets>
