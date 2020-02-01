@@ -4,8 +4,8 @@ import xbmc
 import xbmcgui
 import xbmcaddon
 
-__plugin__ = "steamlink"
-__author__ = "toast"
+__plugin__ = "Steamlink"
+__author__ = "Toast"
 __url__ = "https://github.com/swetoast/steamlink-launcher/"
 __git_url__ = "https://github.com/swetoast/steamlink-launcher/"
 __credits__ = "Ludeeus, Slouken, sgroen88, ToiletSalad"
