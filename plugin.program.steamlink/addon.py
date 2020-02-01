@@ -8,7 +8,7 @@ __plugin__ = "steamlink"
 __author__ = "toast"
 __url__ = "https://github.com/swetoast/steamlink-launcher/"
 __git_url__ = "https://github.com/swetoast/steamlink-launcher/"
-__credits__ = "Toast, Ludeeus, Slouken, sgroen88, ToiletSalad"
+__credits__ = "Ludeeus, Slouken, sgroen88, ToiletSalad"
 __version__ = "0.0.7"
 
 dialog = xbmcgui.Dialog()
