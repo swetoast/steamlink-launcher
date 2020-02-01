@@ -29,10 +29,7 @@ install_on_libre () {
 kodi-send --action="Notification(Installing Steamlink, Please wait while installing Steamlink and packages,1500)"
    mkdir -p /storage/steamlink
    mkdir -p /storage/steamlink/overlay_work
-   mkdir -p /storage/steamlink/libs
-   mkdir -p /storage/steamlink/udev
-   mkdir -p /storage/steamlink/udev/rules.d
-wget https://raw.githubusercontent.com/swetoast/steamlink-launcher/dev/libreelec_additonal/55-steam-input.rules -O /storage/steamlink/udev/rules.d/55-steam-input.rules
+   mkdir -p /storage/steamlink/lib
 wget https://raw.githubusercontent.com/swetoast/steamlink-launcher/dev/libreelec_additonal/60-steam-input.rules -O /storage/.config/system.d/storage-steamlink-udev-rules.d.mount
    systemctl enable storage-steamlink-udev-rules.d.mount
    udevadm trigger
@@ -47,7 +44,7 @@ start_steamlink
 
 install_on_osmc () {
 kodi-send --action="Notification(Installing Steamlink, Please wait while installing Steamlink and packages,1500)"
-sudo wget https://raw.githubusercontent.com/swetoast/steamlink-launcher/dev/libreelec_additonal/55-steam-input.rules -O /lib/udev/rules.d/55-steamlink.rules
+sudo mv /home/osmc/.local/share/SteamLink/udev/rules.d/55-steamlink.rules /lib/udev/rules.d/55-steamlink.rules 
    sudo apt-get install curl gnupg libc6 xz-utils -y
 wget http://media.steampowered.com/steamlink/rpi/steamlink.deb -O /tmp/steamlink.deb
    sudo dpkg -i /tmp/steamlink.deb
@@ -65,8 +62,9 @@ esac
 
 
 start_steamlink () {
+chmod 755 /tmp/steamlink-watchdog.sh
 case $(cat /etc/os-release | grep -oE "^NAME=\".*") in
- *LibreELEC*) su -c "nohup sudo /tmp/steamlink-watchdog.sh >/dev/null 2>&1 &" ;;
+ *LibreELEC*) su -c "nohup /tmp/steamlink-watchdog.sh >/dev/null 2>&1 &" ;;
       *OSMC*) sudo su -c "nohup sudo openvt -c 7 -s -f -l /tmp/steamlink-watchdog.sh >/dev/null 2>&1 &" ;;
 esac   
 
