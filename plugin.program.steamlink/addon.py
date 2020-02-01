@@ -75,8 +75,6 @@ detect_steamlink () {
 if [ "$(which steamlink)" -eq "1" ]; then start_steamlink ; else install_on_os; fi
 }
 
-}
-
 detect_steamlink
 """)
 
@@ -110,6 +108,7 @@ if [ "$(cat /etc/os-release | grep -o "OSMC" | wc -l)" -eq 1 ]
    then watchdog_osmc
    else watchdog_libre
 fi
+}
 os_detection
 """)
         outfile.close()
