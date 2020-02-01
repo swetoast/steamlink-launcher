@@ -39,6 +39,7 @@ Steamlink Launcher is licensed under GPL2
 
 * [Valve Forums](https://steamcommunity.com/app/353380/discussions/6/)
 * [OSMC Forums](https://discourse.osmc.tv/t/regarding-steamlink/76800)
+* [Libreelec Forums](https://forum.libreelec.tv/thread/14643-adding-steamlink-to-v9-0-0)
 
 [contributors-shield]: https://img.shields.io/github/contributors/swetoast/steamlink-launcher.svg?style=for-the-badge
 [contributors]: https://github.com/swetoast/steamlink-launcher/graphs/contributors/
