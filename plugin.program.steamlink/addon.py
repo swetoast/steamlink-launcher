@@ -58,21 +58,25 @@ start_steamlink
 }
 
 install_on_os () {
-if [ "$(cat /etc/os-release | grep -o "OSMC" | wc -l)" -eq 1 ]
-   then install_on_osmc
-   else install_on_libre
-fi
+case $(cat /etc/os-release | grep -oE "^NAME=\".*") in
+ *LibreELEC*) install_on_libre ;;
+      *OSMC*) install_on_osmc ;;
+esac
 }
 
 
 start_steamlink () {
-if [ "$(cat /etc/os-release | grep -o "OSMC" | wc -l)" -eq 1 ]
-   then sudo su -c "nohup sudo openvt -c 7 -s -f -l /tmp/steamlink-watchdog.sh >/dev/null 2>&1 &"
-   else sudo su -c "nohup sudo /tmp/steamlink-watchdog.sh >/dev/null 2>&1 &"
-fi
+case $(cat /etc/os-release | grep -oE "^NAME=\".*") in
+ *LibreELEC*) su -c "nohup sudo /tmp/steamlink-watchdog.sh >/dev/null 2>&1 &" ;;
+      *OSMC*) sudo su -c "nohup sudo openvt -c 7 -s -f -l /tmp/steamlink-watchdog.sh >/dev/null 2>&1 &" ;;
+esac   
 
 detect_steamlink () {
-if [ "$(which steamlink)" -eq "1" ]; then start_steamlink ; else install_on_os; fi
+case $(cat /etc/os-release | grep -oE "^NAME=\".*") in
+ *LibreELEC*) if [ -f "/storage/steamlink/steamlink" ]; then start_steamlink ; else install_on_os; fi ;;
+      *OSMC*) if [ "$(which steamlink)" -eq "1" ]; then start_steamlink ; else install_on_os; fi ;;
+esac   
+
 }
 
 detect_steamlink
@@ -104,11 +108,12 @@ systemctl start kodi
 }
 
 os_detection () {
-if [ "$(cat /etc/os-release | grep -o "OSMC" | wc -l)" -eq 1 ]
-   then watchdog_osmc
-   else watchdog_libre
-fi
+case $(cat /etc/os-release | grep -oE "^NAME=\".*") in
+ *LibreELEC*) watchdog_libre ;;
+      *OSMC*) watchdog_osmc ;;
+esac
 }
+
 os_detection
 """)
         outfile.close()
