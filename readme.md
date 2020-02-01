@@ -3,14 +3,15 @@
 ![Project Maintenance][maintenance-shield1]
 [![Contributors][contributors-shield]][contributors]
 <a href="https://liberapay.com/Toast/donate"><img alt="Donate using Liberapay" align="right" align="top" src="https://liberapay.com/assets/widgets/donate.svg"></a>
-# Steamlink Launcher for OSMC
+# Steamlink Launcher for Kodi (ArmHF)
 
-This is a laucher only for Open Source Mediacenter (OSMC), the launcher installs two scripts that run and handles Steamlink remember this is all beta so report performance issues to Valve and launcher issues here, i will not handle performance issues at all will refer to Valve for that.
+This is a laucher only for Kodi its intended for RPI 2 and 3 not 4, the launcher installs steamlink and a watchdog when starting Steamlink remember this is all beta so report performance issues to Valve and launcher issues here, i will not handle performance issues at all will refer to Valve for that.
 
 ## Installation
 
 * download the [zip](https://github.com/swetoast/steamlink-launcher/releases) of the launcher and install it via Kodi
 * if steamlink is missing it will install all files on demand
+* libreelec users needs to install libs manually at the moment.
 
 ## Want to contribute
 
@@ -26,8 +27,9 @@ registered trademarks of Valve Corporation in the US and other countries.
 Here is a full list of people that helped out on this project
 
 * [Ludeeus](https://github.com/ludeeus) - code clean up
-* [Slouken](https://github.com/slouken) - for adding lib replacement for OSMC
+* [Slouken](https://github.com/slouken) - for adding lib replacement for OSMC along with updates to the project
 * [sgroen88](https://github.com/sgroen88) - adding shell execution to the script
+* ToiletSalad - for initial work for libreelec
 
 ## License
 
