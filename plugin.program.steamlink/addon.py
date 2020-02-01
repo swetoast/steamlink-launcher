@@ -30,6 +30,7 @@ kodi-send --action="Notification(Installing Steamlink, Please wait while install
    mkdir -p /storage/steamlink
    mkdir -p /storage/steamlink/overlay_work
    mkdir -p /storage/steamlink/lib
+   mv /storage/steamlink/udev/rules.d/55-steamlink.rules /storage/.config/udev.rules.d/55-steamlink.rules
 wget https://raw.githubusercontent.com/swetoast/steamlink-launcher/dev/libreelec_additonal/60-steam-input.rules -O /storage/.config/system.d/storage-steamlink-udev-rules.d.mount
    systemctl enable storage-steamlink-udev-rules.d.mount
    udevadm trigger
