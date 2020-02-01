@@ -30,19 +30,18 @@ kodi-send --action="Notification(Installing Steamlink, Please wait while install
    mkdir -p /storage/steamlink
    mkdir -p /storage/steamlink/overlay_work
    mkdir -p /storage/steamlink/libs
-   mkdir -p /storage/.config/system.d/
-wget https://raw.githubusercontent.com/swetoast/steamlink-launcher/dev/libreelec_additonal/60-steam-input.rules -O /storage/.config/system.d/storage-steamlinkudev-rules.d.mount
-wget https://raw.githubusercontent.com/swetoast/steamlink-launcher/dev/libreelec_additonal/55-steam-input.rules -O /storage/.config/system.d/storage-steamlinkudev-rules.d.mount
-   mount -t overlay overlay -o lowerdir=/lib/udev/rules.d,upperdir=/storage/steamlink/udev/rules.d/,workdir=/storage/steamlink/overlay_work /lib/udev/rules.d
+   mkdir -p /storage/steamlink/udev
+   mkdir -p /storage/steamlink/udev/rules.d
+wget https://raw.githubusercontent.com/swetoast/steamlink-launcher/dev/libreelec_additonal/55-steam-input.rules -O /storage/steamlink/udev/rules.d/55-steam-input.rules
+wget https://raw.githubusercontent.com/swetoast/steamlink-launcher/dev/libreelec_additonal/60-steam-input.rules -O /storage/.config/system.d/storage-steamlink-udev-rules.d.mount
+   systemctl enable storage-steamlink-udev-rules.d.mount
    udevadm trigger
-systemctl enable storage-steamlink-udev-rules.d.mount
 wget "$(wget -q -O - http://media.steampowered.com/steamlink/rpi/public_build.txt)" -O /storage/steamlink/steamlink.tar.gz
    tar -zxf /storage/steamlink/steamlink.tar.gz
    rm /storage/steamlink/steamlink.tar.gz
    wget REPLACEME -O /storage/steamlink/lib.zip
    unzip /storage/steamlink/lib.zip
    rm /storage/steamlink/lib.zip
-   usermod -a -G input,plugdev root
 start_steamlink
 }
 
@@ -103,7 +102,7 @@ if [ "$HYPERIONFIX" = 1 ]; then
    if [ ! "$(pgrep hyperion)" ]; then systemctl start hyperion; fi
 fi
 systemctl stop kodi
-/storage/steamlink/steamlink &> /storage/steamlink/steamlink.log >/dev/null 2>&1 &
+/storage/steamlink/steamlink.sh &> /storage/steamlink/steamlink.log >/dev/null 2>&1 &
 systemctl start kodi
 }
 
