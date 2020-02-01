@@ -3,7 +3,7 @@
 ![Project Maintenance][maintenance-shield1]
 [![Contributors][contributors-shield]][contributors]
 <a href="https://liberapay.com/Toast/donate"><img alt="Donate using Liberapay" align="right" align="top" src="https://liberapay.com/assets/widgets/donate.svg"></a>
-# Steamlink Launcher for Kodi (ArmHF)
+# Steamlink Launcher for Kodi 19 (ArmHF)
 
 This is a laucher only for Kodi its intended for RPI 2 and 3 not 4, the launcher installs steamlink and a watchdog when starting Steamlink remember this is all beta so report performance issues to Valve and launcher issues here, i will not handle performance issues at all will refer to Valve for that.
 
