@@ -27,27 +27,35 @@ def create_files():
 # installation part
 install_on_libre () {
 kodi-send --action="Notification(Installing Steamlink, Please wait while installing Steamlink and packages.. this might take awhile,1500)"
+
    mkdir -p /storage/steamlink
    mkdir -p /storage/steamlink/overlay_work
    mkdir -p /storage/steamlink/lib
-   mv /storage/steamlink/udev/rules.d/55-steamlink.rules /storage/.config/udev.rules.d/55-steamlink.rules
-wget https://raw.githubusercontent.com/swetoast/steamlink-launcher/dev/libreelec_additonal/60-steam-input.rules -O /storage/.config/system.d/storage-steamlink-udev-rules.d.mount
-   systemctl enable storage-steamlink-udev-rules.d.mount
-   udevadm trigger
+   mkdir -p /storage/raspbian
+   mkdir -p /storage/raspbian/lib
+
+wget https://downloads.raspberrypi.org/raspbian_full_latest -O /storage/raspbian/raspbian-stretch-full.zip
 wget "$(wget -q -O - http://media.steampowered.com/steamlink/rpi/public_build.txt)" -O /storage/steamlink/steamlink.tar.gz
+wget https://raw.githubusercontent.com/swetoast/steamlink-launcher/dev/libreelec_additonal/60-steam-input.rules -O /storage/.config/system.d/storage-steamlink-udev-rules.d.mount
+
    tar -zxf /storage/steamlink/steamlink.tar.gz
-   rm /storage/steamlink/steamlink.tar.gz
-   mkdir /storage/raspbian
-   wget https://downloads.raspberrypi.org/raspbian_full_latest -O /storage/raspbian/raspbian-stretch-full.zip
    unzip /storage/raspbian/raspbian-stretch-full.zip
-   mkdir /storage/raspbian/lib
-   mount -o loop,ro,offset=50331648 -t ext4  /storage/raspbian/raspbian-stretch-full.zip
+      
+   mount -o loop,ro,offset=50331648 -t ext4 /storage/raspbian/raspbian-stretch-full.zip
    cd /storage/raspbian/lib
    for i in libpng16.so.16 libicui18n.so.57 libicuuc.so.57 libicudata.so.57 libX11-xcb.so.1 libX11.so.6 libXext.so.6 libxcb.so.1 libxkbcommon-x11.so.0 libXau.so.6 libXdmcp.so.6 libxcb-xkb.so.1 libbsd.so.0; do cp "$(find -name $i)" .. ; done
    cd ..
    umount /storage/raspbian/lib
-   mv /storage/raspbian/lib /storage/steamlink/lib
+   
+   mv /storage/raspbian/lib/* /storage/steamlink/lib
+   mv /storage/steamlink/udev/rules.d/55-steamlink.rules /storage/.config/udev.rules.d/55-steamlink.rules
+
+   systemctl enable storage-steamlink-udev-rules.d.mount
+   udevadm trigger
+   
+   rm /storage/steamlink/steamlink.tar.gz
    rm -r /storage/rasbian/
+
 start_steamlink
 }
 
