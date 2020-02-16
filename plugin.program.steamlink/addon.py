@@ -26,7 +26,7 @@ def create_files():
     outfile.write("""#!/bin/sh
 # installation part
 install_on_libre () {
-kodi-send --action="Notification(Installing Steamlink, Please wait while installing Steamlink and packages,1500)"
+kodi-send --action="Notification(Installing Steamlink, Please wait while installing Steamlink and packages.. this might take awhile,1500)"
    mkdir -p /storage/steamlink
    mkdir -p /storage/steamlink/overlay_work
    mkdir -p /storage/steamlink/lib
