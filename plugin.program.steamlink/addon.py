@@ -40,7 +40,6 @@ wget "$(wget -q -O - http://media.steampowered.com/steamlink/rpi/public_build.tx
    mkdir /storage/raspbian
    wget https://downloads.raspberrypi.org/raspbian_full_latest -O /storage/raspbian/raspbian-stretch-full.zip
    unzip /storage/raspbian/raspbian-stretch-full.zip
-   rm -f /storage/raspbian/raspbian-stretch-full.zip
    mkdir /storage/raspbian/lib
    mount -o loop,ro,offset=50331648 -t ext4  /storage/raspbian/raspbian-stretch-full.zip
    cd /storage/raspbian/lib
@@ -48,6 +47,7 @@ wget "$(wget -q -O - http://media.steampowered.com/steamlink/rpi/public_build.tx
    cd ..
    umount /storage/raspbian/lib
    rmdir /storage/raspbian/lib
+   rm -r /storage/rasbian/
    mv /storage/raspbian/lib /storage/steamlink/lib
 start_steamlink
 }
