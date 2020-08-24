@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.steamlink" name="Steamlink Launcher" version="0.0.6" provider-name="Toast">
+<addon id="plugin.program.steamlink" name="Steamlink Launcher" version="0.0.6a" provider-name="Toast">
   <requires>
     <import addon="xbmc.python" version="2.25.0"/>
   </requires>
@@ -18,7 +18,7 @@
     <email></email> <!-- may be left blank  -->
     <source>https://github.com/swetoast/steamlink-launcher</source>
     <news>
-      Updated with Kodi Matrix compabiltity (Version 19)
+      Updated with with wake on lan features
     </news>
     <assets>
         <icon>resources/icon.png</icon>
