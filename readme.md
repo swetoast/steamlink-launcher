@@ -28,6 +28,7 @@ Here is a full list of people that helped out on this project
 
 * [Ludeeus](https://github.com/ludeeus) - code clean up
 * [Slouken](https://github.com/slouken) - for adding lib replacement for OSMC
+* [Valve/Slouken](https://github.com/swetoast/steamlink-launcher/commits?author=slouken) - for additional code donations
 * [sgroen88](https://github.com/sgroen88) - adding shell execution to the script
 
 ## License
