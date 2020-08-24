@@ -9,7 +9,7 @@ __author__ = "toast"
 __url__ = "https://github.com/swetoast/steamlink-launcher/"
 __git_url__ = "https://github.com/swetoast/steamlink-launcher/"
 __credits__ = "toast"
-__version__ = "0.0.6"
+__version__ = "0.0.6a"
 
 dialog = xbmcgui.Dialog()
 addon = xbmcaddon.Addon(id='plugin.program.steamlink')
@@ -51,6 +51,13 @@ if [ "$(which steamlink)" = "" ]; then
     dpkg -i /tmp/steamlink.deb
     rm -f /tmp/steamlink.deb
 fi
+
+if [ $(/usr/bin/dpkg-query '-W' -f='${Status}' wakeonlan 2>/dev/null | /bin/grep -c "ok installed") -eq 1 ]; then 
+   if [ -f "$HOME/.wakeup" ]; then 
+      /usr/bin/wakeonlan $(cat "$HOME/.wakeup") # create a .wakeup with your MAC id in home folder to wake up your computer
+   fi
+fi
+
 sudo -u osmc steamlink
 
 # Restart the graphical interface
