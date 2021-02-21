@@ -23,7 +23,7 @@ def main():
 def create_files():
     """Creates bash files to be used for this plugin."""
     with open('/tmp/steamlink-launcher.sh', 'w') as outfile:
-        outfile.write("""#!/bin/sh
+        outfile.write("""#!/bin/sh -e
 # installation part
 install_on_libre () {
 kodi-send --action="Notification(Installing Steamlink, Please wait while installing Steamlink and packages.. this might take awhile,1500)"
@@ -38,7 +38,7 @@ wget https://downloads.raspberrypi.org/raspbian_full_latest -O /storage/raspbian
 wget "$(wget -q -O - http://media.steampowered.com/steamlink/rpi/public_build.txt)" -O /storage/steamlink/steamlink.tar.gz
 wget https://raw.githubusercontent.com/swetoast/steamlink-launcher/dev/libreelec_additonal/60-steam-input.rules -O /storage/.config/system.d/storage-steamlink-udev-rules.d.mount
 
-   tar -zxf /storage/steamlink/steamlink.tar.gz
+   tar -zxf /storage/steamlink/steamlink.tar.gz --strip-components 1
    unzip /storage/raspbian/raspbian-stretch-full.zip
       
    mount -o loop,ro,offset=50331648 -t ext4 /storage/raspbian/raspbian-stretch-full.zip
@@ -48,13 +48,19 @@ wget https://raw.githubusercontent.com/swetoast/steamlink-launcher/dev/libreelec
    umount /storage/raspbian/lib
    
    mv /storage/raspbian/lib/* /storage/steamlink/lib
-   mv /storage/steamlink/udev/rules.d/55-steamlink.rules /storage/.config/udev.rules.d/55-steamlink.rules
+   mv /storage/steamlink/udev/rules.d/56-steamlink.rules /storage/.config/udev.rules.d/56-steamlink.rules
 
+   systemctl daemon-reload
    systemctl enable storage-steamlink-udev-rules.d.mount
+   systemctl start storage-steamlink-udev-rules.d.mount
    udevadm trigger
    
    rm /storage/steamlink/steamlink.tar.gz
    rm -r /storage/rasbian/
+   
+   # Note:
+   # Last command so we are sure the installation script has been completed (bash -e will interrupt this script as soon as it encounters an error)
+   touch /storage/steamlink/steamlink
 
 start_steamlink
 }
@@ -98,7 +104,7 @@ detect_steamlink
 """)
 
     with open('/tmp/steamlink-watchdog.sh', 'w') as outfile:
-        outfile.write("""#!/bin/bash
+        outfile.write("""#!/bin/bash -e
 # watchdog part
 watchdog_osmc () {
 sudo systemctl stop mediacenter
