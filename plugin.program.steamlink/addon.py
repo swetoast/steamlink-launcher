@@ -114,7 +114,7 @@ detect_steamlink
 """)
 
     with open('/tmp/steamlink-watchdog.sh', 'w') as outfile:
-        outfile.write("""#!/bin/bash -e
+        outfile.write("""#!/bin/bash
 # watchdog part
 watchdog_osmc () {
 sudo systemctl stop mediacenter
