@@ -134,7 +134,7 @@ if [ "$HYPERIONFIX" = 1 ]; then
    if [ ! "$(pgrep hyperion)" ]; then systemctl start hyperion; fi
 fi
 systemctl stop kodi
-/storage/steamlink/steamlink.sh &> /storage/steamlink/steamlink.log >/dev/null 2>&1 &
+nohup /storage/steamlink/steamlink.sh > /storage/steamlink/steamlink.log 2>&1 &
 systemctl start kodi
 }
 
