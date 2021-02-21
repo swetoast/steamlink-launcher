@@ -43,7 +43,7 @@ wget https://raw.githubusercontent.com/swetoast/steamlink-launcher/dev/libreelec
       
    mount -o loop,ro,offset=50331648 -t ext4 /storage/raspbian/raspbian-stretch-full.zip
    cd /storage/raspbian/lib
-   for i in libpng16.so.16 libicui18n.so.57 libicuuc.so.57 libicudata.so.57 libX11-xcb.so.1 libX11.so.6 libXext.so.6 libxcb.so.1 libxkbcommon-x11.so.0 libXau.so.6 libXdmcp.so.6 libxcb-xkb.so.1 libbsd.so.0; do cp "$(find -name $i)" .. ; done
+   for i in libjpeg.so.62 libpng16.so.16 libicui18n.so.57 libicuuc.so.57 libicudata.so.57 libX11-xcb.so.1 libX11.so.6 libXext.so.6 libxcb.so.1 libxkbcommon-x11.so.0 libXau.so.6 libXdmcp.so.6 libxcb-xkb.so.1 libbsd.so.0; do cp "$(find -name $i)" .. ; done
    cd ..
    umount /storage/raspbian/lib
    
