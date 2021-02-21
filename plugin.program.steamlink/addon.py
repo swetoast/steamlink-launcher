@@ -15,7 +15,7 @@ dialog = xbmcgui.Dialog()
 addon = xbmcaddon.Addon(id='plugin.program.steamlink')
 
 def main():
-"""Main operations of this plugin."""
+    """Main operations of this plugin."""
     create_files()
     output = os.popen("sh /tmp/steamlink-launcher.sh").read()
     dialog.ok("Starting Steamlink...", output)
@@ -23,7 +23,7 @@ def main():
 def create_files():
     """Creates bash files to be used for this plugin."""
     with open('/tmp/steamlink-launcher.sh', 'w') as outfile:
-    outfile.write("""#!/bin/sh
+        outfile.write("""#!/bin/sh
 # installation part
 install_on_libre () {
 kodi-send --action="Notification(Installing Steamlink, Please wait while installing Steamlink and packages.. this might take awhile,1500)"
@@ -71,7 +71,7 @@ start_steamlink
 }
 
 install_on_os () {
-case $(cat /etc/os-release | grep -oE "^NAME=\".*") in
+case $(cat /etc/os-release | grep -oE "^NAME=\\".*") in
  *LibreELEC*) install_on_libre ;;
       *OSMC*) install_on_osmc ;;
 esac
@@ -80,13 +80,14 @@ esac
 
 start_steamlink () {
 chmod 755 /tmp/steamlink-watchdog.sh
-case $(cat /etc/os-release | grep -oE "^NAME=\".*") in
+case $(cat /etc/os-release | grep -oE "^NAME=\\".*") in
  *LibreELEC*) su -c "nohup /tmp/steamlink-watchdog.sh >/dev/null 2>&1 &" ;;
       *OSMC*) sudo su -c "nohup sudo openvt -c 7 -s -f -l /tmp/steamlink-watchdog.sh >/dev/null 2>&1 &" ;;
-esac   
+esac
+}
 
 detect_steamlink () {
-case $(cat /etc/os-release | grep -oE "^NAME=\".*") in
+case $(cat /etc/os-release | grep -oE "^NAME=\\".*") in
  *LibreELEC*) if [ -f "/storage/steamlink/steamlink" ]; then start_steamlink ; else install_on_os; fi ;;
       *OSMC*) if [ "$(which steamlink)" -eq "1" ]; then start_steamlink ; else install_on_os; fi ;;
 esac   
@@ -97,7 +98,7 @@ detect_steamlink
 """)
 
     with open('/tmp/steamlink-watchdog.sh', 'w') as outfile:
-    outfile.write("""#!/bin/bash
+        outfile.write("""#!/bin/bash
 # watchdog part
 watchdog_osmc () {
 sudo systemctl stop mediacenter
@@ -122,7 +123,7 @@ systemctl start kodi
 }
 
 os_detection () {
-case $(cat /etc/os-release | grep -oE "^NAME=\".*") in
+case $(cat /etc/os-release | grep -oE "^NAME=\\".*") in
  *LibreELEC*) watchdog_libre ;;
       *OSMC*) watchdog_osmc ;;
 esac
