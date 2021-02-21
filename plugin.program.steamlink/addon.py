@@ -57,7 +57,17 @@ wget https://raw.githubusercontent.com/swetoast/steamlink-launcher/dev/libreelec
    
    rm /storage/steamlink/steamlink.tar.gz
    rm -r /storage/rasbian/
+
+   # Note:
+   # Since we are running it for Raspberry pi 4, we should not check the CPU informations
+   touch /storage/steamlink/.ignore_cpuinfo
    
+   # Also we'd better use the right place to setup the udev rules
+   sed -i 's@UDEV_RULES_DIR=/lib/udev/rules.d@UDEV_RULES_DIR=/storage/.config/udev.rules.d@' /storage/steamlink/steamlink.sh
+   
+   # Also we better remove allthe 'sudo' references (LibreElec doesn't like that)
+   sed -i 's@sudo @@g' /storage/steamlink/steamlink.sh
+
    # Note:
    # Last command so we are sure the installation script has been completed (bash -e will interrupt this script as soon as it encounters an error)
    touch /storage/steamlink/steamlink
