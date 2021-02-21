@@ -67,7 +67,11 @@ wget https://raw.githubusercontent.com/swetoast/steamlink-launcher/dev/libreelec
    
    # Also we better remove allthe 'sudo' references (LibreElec doesn't like that)
    sed -i 's@sudo @@g' /storage/steamlink/steamlink.sh
-
+   
+   # This will allow Steamlink to start, but there is no way to make it stream any games
+   # It is a step further but not yet working sadly
+   sed -i 's@QPLATFORM="eglfs"@QPLATFORM="linuxfb"@' /storage/steamlink/steamlink.sh
+   
    # Note:
    # Last command so we are sure the installation script has been completed (bash -e will interrupt this script as soon as it encounters an error)
    touch /storage/steamlink/steamlink
