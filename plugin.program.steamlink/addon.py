@@ -22,6 +22,48 @@ def main():
 
 def create_files():
     """Creates bash files to be used for this plugin."""
+    with open('/storage/.config/system.d/steamlink.service', 'w') as outfile:
+        outfile.write("""[Unit]
+Description="Watchdog to start Steamlink"
+After=graphical.target
+ConditionPathExists=/tmp/steamlink.ready
+
+[Service]
+Type=oneshot
+ExecStart=/storage/steamlink/start-from-kodi.sh
+
+[Install]
+WantedBy=graphical.target
+""")
+
+    with open('/storage/steamlink/start-from-kodi.sh', 'w') as outfile:
+        outfile.write("""#!bin/bash
+
+. /etc/profile
+oe_setup_addon plugin.program.steamlink
+
+# Mount an overlay for udev rules and reload udev rules
+if [ $(grep -c "/lib/udev/rules.d" /proc/mounts) -eq 0 ]; then
+  if [ ! -d /storage/steamlink/.overlay ]; then
+    mkdir -p /storage/steamlink/.overlay
+  fi
+  mount -t overlay overlay -o lowerdir=/lib/udev/rules.d,upperdir=/storage/steamlink/udev/rules.d/,workdir=/storage/steamlink/.overlay /lib/udev/rules.d/
+  udevadm trigger
+fi
+
+# Launch Steam Link
+systemctl stop kodi # Shutdown kodi or controller input goes to kodi too
+systemctl stop pulseaudio # Shutdown pulseaudio or no sound
+
+# To read the 
+/storage/steamlink/steamlink.sh
+sleep 3
+
+# Cleanup
+umount /lib/udev/rules.d/
+systemctl start pulseaudio
+systemctl start kodi""")
+
     with open('/tmp/steamlink-launcher.sh', 'w') as outfile:
         outfile.write("""#!/bin/sh -e
 # installation part
@@ -67,11 +109,10 @@ wget https://raw.githubusercontent.com/swetoast/steamlink-launcher/dev/libreelec
    
    # Also we better remove allthe 'sudo' references (LibreElec doesn't like that)
    sed -i 's@sudo @@g' /storage/steamlink/steamlink.sh
-   
-   # This will allow Steamlink to start, but there is no way to make it stream any games
-   # It is a step further but not yet working sadly
-   sed -i 's@QPLATFORM="eglfs"@QPLATFORM="linuxfb"@' /storage/steamlink/steamlink.sh
-   
+
+   # Setup executable flags to the start-from-kodi.sh script
+   chmod a+x /storage/steamlink/start-from-kodi.sh
+
    # Note:
    # Last command so we are sure the installation script has been completed (bash -e will interrupt this script as soon as it encounters an error)
    touch /storage/steamlink/steamlink
@@ -132,14 +173,12 @@ sudo systemctl start mediacenter
 }
 
 watchdog_libre () {
-systemctl stop kodi
-if [ "$HYPERIONFIX" = 1 ]; then
-   if [ "$(pgrep hyperion)" ]; then systemctl stop hyperion; fi
-   if [ ! "$(pgrep hyperion)" ]; then systemctl start hyperion; fi
-fi
-systemctl stop kodi
-nohup /storage/steamlink/steamlink.sh > /storage/steamlink/steamlink.log 2>&1 &
-systemctl start kodi
+# Prerequisite to start Steamlink
+touch /tmp/steamlink.ready
+
+# To read logs you need to do:
+# journalctl -u steamlink -f
+systemctl start steamlink
 }
 
 os_detection () {
@@ -153,3 +192,4 @@ os_detection
 """)
         outfile.close()
 main()
+
