@@ -40,10 +40,9 @@ if [ "$(which steamlink)" = "" ]; then
     rm -f /tmp/steamlink.deb
 fi
 
-if [ "$(/usr/bin/dpkg-query '-W' -f='${Status}' wakeonlan 2>/dev/null | /bin/grep -c "ok installed")" -eq 1 ]; then 
-   if [ -f "$HOME/.wakeup" ] 
+if [ -f "$HOME/.wakeup" ] 
    then /usr/bin/wakeonlan "$(cat "$HOME/.wakeup")"
-   else sudo apt install wakeonlan -y;  /usr/bin/wakeonlan "$(cat "$HOME/.wakeup")"; fi
+   else sudo apt install wakeonlan -y;  /usr/bin/wakeonlan "$(cat "$HOME/.wakeup")" 
 fi
 
 sudo -u osmc steamlink
