@@ -27,8 +27,7 @@ registered trademarks of Valve Corporation in the US and other countries.
 Here is a full list of people that helped out on this project
 
 * [Ludeeus](https://github.com/ludeeus) - code clean up
-* [Slouken](https://github.com/slouken) - for adding lib replacement for OSMC
-* [Valve/Slouken](https://github.com/swetoast/steamlink-launcher/commits?author=slouken) - for additional code donations
+* [Valve/Slouken](https://github.com/swetoast/steamlink-launcher/commits?author=slouken) - for additional code donations and for adding lib replacement for OSMC
 * [sgroen88](https://github.com/sgroen88) - adding shell execution to the script
 
 ## License
