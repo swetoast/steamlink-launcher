@@ -46,8 +46,6 @@ if [ -f "$HOME/.wakeup" ]
 fi
 
 sudo -u osmc steamlink
-
-# Restart the graphical interface
 openvt -c 7 -s -f clear
 systemctl start mediacenter
 """)
