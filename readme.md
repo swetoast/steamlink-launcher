@@ -15,7 +15,7 @@ This is a laucher only for Open Source Mediacenter (OSMC), the launcher installs
 ## Want to contribute
 
 
-Make sure to lint your code so its proper then submit it via PR here on the tracker, All PR should be directed towards the development branch not the master branch
+Make sure to lint your code so its proper then submit it via PR here on the tracker.
 
 ## Acknowledgement
 
