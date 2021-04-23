@@ -35,7 +35,7 @@ systemctl stop mediacenter
 if [ "$(systemctl is-active hyperion.service)" = "active" ]; then systemctl restart hyperion; fi
 
 if [ "$(which steamlink)" = "" ]; then
-    curl -o /tmp/steamlink.deb -#Of http://media.steampowered.com/steamlink/rpi/steamlink.deb
+    curl -o /tmp/steamlink.deb -#Of http://media.steampowered.com/steamlink/rpi/latest/steamlink.deb
     dpkg -i /tmp/steamlink.deb
     rm -f /tmp/steamlink.deb
 fi
