@@ -9,7 +9,7 @@ __author__ = "toast"
 __url__ = "https://github.com/swetoast/steamlink-launcher/"
 __git_url__ = "https://github.com/swetoast/steamlink-launcher/"
 __credits__ = "toast"
-__version__ = "0.0.8"
+__version__ = "0.0.9"
 
 dialog = xbmcgui.Dialog()
 addon = xbmcaddon.Addon(id='plugin.program.steamlink')
