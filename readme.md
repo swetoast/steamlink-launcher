@@ -30,6 +30,12 @@ Here is a full list of people that helped out on this project
 * [Valve/Slouken](https://github.com/swetoast/steamlink-launcher/commits?author=slouken) - for additional code donations and for adding lib replacement for OSMC
 * [sgroen88](https://github.com/sgroen88) - adding shell execution to the script
 
+## Donator
+
+Here is a list of people that donated to this project, super thankful for people donating.
+
+* Moritz Goltdammer
+
 ## License
 
 Steamlink Launcher is licensed under GPL2
