@@ -35,7 +35,7 @@ systemctl stop mediacenter
 if [ "$(systemctl is-active hyperion.service)" = "active" ]; then systemctl restart hyperion; fi
 
 if [ "$(which steamlink)" = "" ]; then
-    apt-get install gnupg -y
+    apt install gnupg -y
     curl -o /tmp/steamlink.deb -#Of http://media.steampowered.com/steamlink/rpi/latest/steamlink.deb
     dpkg -i /tmp/steamlink.deb
     rm -f /tmp/steamlink.deb
