@@ -37,6 +37,13 @@ Here is a list of people that donated to this project, super thankful for people
 
 * Moritz Goltdammer
 
+## Got issues
+
+* if the bug is related to the launcher, file an issue
+* if its related to OSMC like crashing the pi adding overlays etc start a thread on OSMC Forums.
+
+this makes it less spammy on the issue tracker with OSMC issues again this launcher does very little on a OS level all it does is starts steamlink.
+
 ## License
 
 Steamlink Launcher is licensed under GPL2
