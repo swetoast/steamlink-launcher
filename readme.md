@@ -44,6 +44,11 @@ Here is a list of people that donated to this project, super thankful for people
 
 this makes it less spammy on the issue tracker with OSMC issues again this launcher does very little on a OS level all it does is starts steamlink.
 
+Known issues:
+
+* Fails to start on RPI4 due to a kernel racing issue, needs a kernel fix from RPI Foundation and a merge from OSMC 
+  https://github.com/swetoast/steamlink-launcher/issues/26
+
 ## License
 
 Steamlink Launcher is licensed under GPL2
