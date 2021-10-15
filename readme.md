@@ -46,8 +46,10 @@ this makes it less spammy on the issue tracker with OSMC issues again this launc
 
 Known issues:
 
-* Fails to start on RPI4 due to a kernel racing issue, needs a kernel fix from RPI Foundation and a merge from OSMC 
-  https://github.com/swetoast/steamlink-launcher/issues/26
+if these fixes are out of date and its working report back on the tracker.
+
+* [Fails to start on RPI4 due to a kernel racing issue, needs a kernel fix from RPI Foundation and a merge from OSMC](https://github.com/swetoast/steamlink-launcher/issues/26) 
+  
 
 ## License
 
