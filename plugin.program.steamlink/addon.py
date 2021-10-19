@@ -41,9 +41,9 @@ if [ "$(which steamlink)" = "" ]; then
     rm -f /tmp/steamlink.deb
 fi
 
-if [ -f "$HOME/.wakeup" ] 
-   then /usr/bin/wakeonlan "$(cat "$HOME/.wakeup")"
-   else sudo apt install wakeonlan -y;  /usr/bin/wakeonlan "$(cat "$HOME/.wakeup")" 
+if [ -f "/home/osmc/.wakeup" ] 
+   then /usr/bin/wakeonlan "$(cat "/home/osmc/.wakeup")"
+   else sudo apt install wakeonlan -y;  /usr/bin/wakeonlan "$(cat "/home/osmc/.wakeup")" 
 fi
 
 sudo -u osmc steamlink
