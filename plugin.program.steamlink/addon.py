@@ -36,9 +36,17 @@ if [ "$(systemctl is-active hyperion.service)" = "active" ]; then systemctl rest
 
 if [ "$(which steamlink)" = "" ]; then
     apt install gnupg -y
+    kodi-send --action="Notification(Downloading and installing Steamlink... ,3000)"; 
     curl -o /tmp/steamlink.deb -#Of http://media.steampowered.com/steamlink/rpi/latest/steamlink.deb
     dpkg -i /tmp/steamlink.deb
     rm -f /tmp/steamlink.deb
+fi
+
+if ! grep -q "dtoverlay=vc4-fkms-v3d" /boot/config.txt; 
+    then echo "dtoverlay=vc4-fkms-v3d" >> /boot/config.txt
+         kodi-send --action="Notification(dtoverlay=vc4-fkms-v3d was missing from /boot/config.txt, however it has been added and now it will reboot. ,3000)"; 
+         sleep 15
+         reboot
 fi
 
 if [ -f "/home/osmc/.wakeup" ] 
