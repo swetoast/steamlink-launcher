@@ -35,7 +35,7 @@ systemctl stop mediacenter
 if [ "$(systemctl is-active hyperion.service)" = "active" ]; then systemctl restart hyperion; fi
 
 if [ "$(which steamlink)" = "" ]; then
-    apt install gnupg -y
+    apt install gnupg curl -y
     kodi-send --action="Notification(Downloading and installing Steamlink... ,3000)"; 
     curl -o /tmp/steamlink.deb -#Of http://media.steampowered.com/steamlink/rpi/latest/steamlink.deb
     dpkg -i /tmp/steamlink.deb
