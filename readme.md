@@ -54,6 +54,7 @@ Status: **Reported**
 
 * https://github.com/swetoast/steamlink-launcher/issues/26
 * https://discourse.osmc.tv/t/race-condition-in-the-rpi4-kernel/89371
+* https://discourse.osmc.tv/t/steamlink-issues-with-kodi-19-and-bootloader-4-0-0/89990/7
   
 
 ## License
