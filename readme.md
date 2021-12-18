@@ -5,8 +5,6 @@
 <a href="https://liberapay.com/Toast/donate"><img alt="Donate using Liberapay" align="right" align="top" src="https://liberapay.com/assets/widgets/donate.svg"></a>
 # Steamlink Launcher for OSMC
 
-**NOTE: Steamlink is broken as of Kodi 19 (for further info see known issues below)**
-
 This is a laucher only for Open Source Mediacenter (OSMC), the launcher installs two scripts that run and handles Steamlink remember this is all beta so report performance issues to Valve and launcher issues here, i will not handle performance issues at all will refer to Valve for that.
 
 ## Installation
@@ -52,11 +50,15 @@ if these fixes are out of date and its working report back on the tracker.
 
 RPI4 crashes in kernel with error message: `vc4_hdmi fef05700.hdmi: ASoC: error at snd_soc_dai_startup on fef05700.hdmi`
 
-Status: **Reported**
-
-* https://discourse.osmc.tv/t/steamlink-issues-with-kodi-19-and-bootloader-4-0-0/89990/7
-* https://github.com/swetoast/steamlink-launcher/issues/37
-  
+add /boot/config.txt:
+```
+gpu_mem=128
+```
+Then install these packages:
+```
+sudo apt install libgles2 libegl1 libgl1-mesa-dri -y
+```
+Sourdce: https://steamcommunity.com/app/353380/discussions/6/3193611900710760046/#c4328520278444207948
 
 ## License
 
