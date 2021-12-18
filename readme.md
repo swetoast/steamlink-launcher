@@ -58,7 +58,7 @@ Then install these packages:
 ```
 sudo apt install libgles2 libegl1 libgl1-mesa-dri -y
 ```
-Sourdce: https://steamcommunity.com/app/353380/discussions/6/3193611900710760046/#c4328520278444207948
+Source: https://steamcommunity.com/app/353380/discussions/6/3193611900710760046/#c4328520278444207948
 
 ## License
 
