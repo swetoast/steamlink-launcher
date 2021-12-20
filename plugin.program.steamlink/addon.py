@@ -39,15 +39,27 @@ if [ ! $(dpkg --list | grep curl) ]; then
     kodi-send --action="Notification(Downloading and installing Steamlink depenancies (curl)... ,3000)" 
     sudo apt update; sudo apt install curl -y 
 fi
+if [ ! $(dpkg --list | grep libgles2) ]; then 
+    kodi-send --action="Notification(Downloading and installing Steamlink depenancies (libgles2)... ,3000)" 
+    sudo apt update; sudo apt install libgles2 -y 
+fi
+if [ ! $(dpkg --list | grep libegl1) ]; then 
+    kodi-send --action="Notification(Downloading and installing Steamlink depenancies (libegl1)... ,3000)" 
+    sudo apt update; sudo apt install libegl1 -y 
+fi
+if [ ! $(dpkg --list | grep libgl1-mesa-dri) ]; then 
+    kodi-send --action="Notification(Downloading and installing Steamlink depenancies (libgl1-mesa-dri)... ,3000)" 
+    sudo apt update; sudo apt install libgl1-mesa-dri -y 
+fi
 if [ ! "$(which steamlink)" = "" ]; then
     kodi-send --action="Notification(Downloading and installing Steamlink Application... ,3000)" 
     curl -o /tmp/steamlink.deb -#Of http://media.steampowered.com/steamlink/rpi/latest/steamlink.deb
     sudo dpkg -i /tmp/steamlink.deb
     rm -f /tmp/steamlink.deb
 fi
-if ! grep -q "dtoverlay=vc4-fkms-v3d" /boot/config.txt; then
-    kodi-send --action="Notification(dtoverlay=vc4-fkms-v3d was missing from /boot/config.txt, however it has been added and now it will reboot. ,3000)"
-    echo "dtoverlay=vc4-fkms-v3d" >> /boot/config.txt
+if ! grep -q "gpu_mem=128" /boot/config.txt; then
+    kodi-send --action="Notification(gpu_mem=128 was missing from /boot/config.txt, however it has been added and now it will reboot. ,3000)"
+    echo "gpu_mem=128" >> /boot/config.txt
     sleep 15
     reboot
 fi
