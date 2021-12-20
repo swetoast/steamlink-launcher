@@ -18,7 +18,7 @@
     <email></email> <!-- may be left blank  -->
     <source>https://github.com/swetoast/steamlink-launcher</source>
     <news>
-      Kodi 19.x update
+      Kodi 19.x update and additional update for OSMC
     </news>
     <assets>
         <icon>resources/icon.png</icon>
