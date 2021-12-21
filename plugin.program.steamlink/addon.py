@@ -31,25 +31,26 @@ sudo su -c "nohup sudo openvt -c 7 -s -f -l /tmp/steamlink-watchdog.sh >/dev/nul
         outfile.close()
     with open('/tmp/steamlink-watchdog.sh', 'w') as outfile:
         outfile.write("""#!/bin/bash
+        sudo apt update # write a better update check
 if [ ! $(dpkg --list | grep gnupg) ]; then 
    kodi-send --action="Notification(Downloading and installing Steamlink depenancies (gnupg)... ,3000)"
-   sudo apt update; sudo apt install gnupg -y
+   sudo apt install gnupg -y
 fi
 if [ ! $(dpkg --list | grep curl) ]; then 
     kodi-send --action="Notification(Downloading and installing Steamlink depenancies (curl)... ,3000)" 
-    sudo apt update; sudo apt install curl -y 
+    sudo apt install curl -y 
 fi
 if [ ! $(dpkg --list | grep libgles2) ]; then 
     kodi-send --action="Notification(Downloading and installing Steamlink depenancies (libgles2)... ,3000)" 
-    sudo apt update; sudo apt install libgles2 -y 
+    sudo apt install libgles2 -y 
 fi
 if [ ! $(dpkg --list | grep libegl1) ]; then 
     kodi-send --action="Notification(Downloading and installing Steamlink depenancies (libegl1)... ,3000)" 
-    sudo apt update; sudo apt install libegl1 -y 
+    sudo apt install libegl1 -y 
 fi
 if [ ! $(dpkg --list | grep libgl1-mesa-dri) ]; then 
     kodi-send --action="Notification(Downloading and installing Steamlink depenancies (libgl1-mesa-dri)... ,3000)" 
-    sudo apt update; sudo apt install libgl1-mesa-dri -y 
+    sudo apt install libgl1-mesa-dri -y 
 fi
 if [ ! "$(which steamlink)" = "" ]; then
     kodi-send --action="Notification(Downloading and installing Steamlink Application... ,3000)" 
@@ -65,7 +66,7 @@ if ! grep -q "gpu_mem=128" /boot/config.txt; then
 fi
 if [ -f "/home/osmc/.wakeup" ] 
    then /usr/bin/wakeonlan "$(cat "/home/osmc/.wakeup")"
-   else sudo apt install wakeonlan -y;  /usr/bin/wakeonlan "$(cat "/home/osmc/.wakeup")" 
+   else sudo apt install wakeonlan -y; /usr/bin/wakeonlan "$(cat "/home/osmc/.wakeup")" 
 fi
 systemctl stop mediacenter
 if [ "$(systemctl is-active hyperion.service)" = "active" ]; then systemctl restart hyperion; fi
