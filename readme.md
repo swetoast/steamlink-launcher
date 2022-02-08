@@ -50,13 +50,9 @@ if these fixes are out of date and its working report back on the tracker.
 
 RPI4 crashes in kernel with error message: `vc4_hdmi fef05700.hdmi: ASoC: error at snd_soc_dai_startup on fef05700.hdmi`
 
-add /boot/config.txt:
+if Steamlink complains about memory either edit in OSMC addon configuration or via ssh then type this `sudo nano /boot/config.txt` and then add or replace:
 ```
 gpu_mem=128
-```
-Then install these packages:
-```
-sudo apt install libgles2 libegl1 libgl1-mesa-dri -y
 ```
 Source: https://steamcommunity.com/app/353380/discussions/6/3193611900710760046/#c4328520278444207948
 
