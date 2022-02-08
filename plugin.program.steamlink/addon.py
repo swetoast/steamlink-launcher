@@ -58,12 +58,6 @@ if [ ! "$(which steamlink)" = "" ]; then
     sudo dpkg -i /tmp/steamlink.deb
     rm -f /tmp/steamlink.deb
 fi
-if ! grep -q "gpu_mem=128" /boot/config.txt; then
-    kodi-send --action="Notification(gpu_mem=128 was missing from /boot/config.txt, however it has been added and now it will reboot. ,3000)"
-    echo "gpu_mem=128" >> /boot/config.txt
-    sleep 15
-    reboot
-fi
 if [ -f "/home/osmc/.wakeup" ] 
    then /usr/bin/wakeonlan "$(cat "/home/osmc/.wakeup")"
    else sudo apt install wakeonlan -y; /usr/bin/wakeonlan "$(cat "/home/osmc/.wakeup")" 
