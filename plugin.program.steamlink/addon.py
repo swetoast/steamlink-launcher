@@ -52,7 +52,7 @@ if [ ! $(dpkg --list | grep libgl1-mesa-dri) ]; then
     kodi-send --action="Notification(Downloading and installing Steamlink depenancies (libgl1-mesa-dri)... ,3000)" 
     sudo apt install libgl1-mesa-dri -y 
 fi
-if [ ! "$(which steamlink)" = "" ]; then
+if [ "$(which steamlink)" = "" ]; then
     kodi-send --action="Notification(Downloading and installing Steamlink Application... ,3000)" 
     curl -o /tmp/steamlink.deb -#Of http://media.steampowered.com/steamlink/rpi/latest/steamlink.deb
     sudo dpkg -i /tmp/steamlink.deb
