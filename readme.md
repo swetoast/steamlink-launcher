@@ -48,6 +48,8 @@ this makes it less spammy on the issue tracker with OSMC issues again this launc
 
 Known issues:
 
+When reporting a bug please prodvide logs this can be done via commandline `grab-logs -A` 
+
 if these fixes are out of date and its working report back on the tracker.
 
 RPI4 crashes in kernel with error message: `vc4_hdmi fef05700.hdmi: ASoC: error at snd_soc_dai_startup on fef05700.hdmi`
