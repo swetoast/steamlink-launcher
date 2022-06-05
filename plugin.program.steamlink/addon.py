@@ -32,23 +32,23 @@ sudo su -c "nohup sudo openvt -c 7 -s -f -l /tmp/steamlink-watchdog.sh >/dev/nul
     with open('/tmp/steamlink-watchdog.sh', 'w') as outfile:
         outfile.write("""#!/bin/bash
         sudo apt update # write a better update check
-if [ ! $(dpkg --list | grep gnupg) ]; then 
+if [ ! dpkg --list | grep -q gnupg ]; then 
    kodi-send --action="Notification(Downloading and installing Steamlink depenancies (gnupg)... ,3000)"
    sudo apt install gnupg -y
 fi
-if [ ! $(dpkg --list | grep curl) ]; then 
+if [ ! dpkg --list | grep -q curl ]; then 
     kodi-send --action="Notification(Downloading and installing Steamlink depenancies (curl)... ,3000)" 
     sudo apt install curl -y 
 fi
-if [ ! $(dpkg --list | grep libgles2) ]; then 
+if [ ! dpkg --list | grep -q libgles2 ]; then 
     kodi-send --action="Notification(Downloading and installing Steamlink depenancies (libgles2)... ,3000)" 
     sudo apt install libgles2 -y 
 fi
-if [ ! $(dpkg --list | grep libegl1) ]; then 
+if [ ! dpkg --list | grep -q libegl1 ]; then 
     kodi-send --action="Notification(Downloading and installing Steamlink depenancies (libegl1)... ,3000)" 
     sudo apt install libegl1 -y 
 fi
-if [ ! $(dpkg --list | grep libgl1-mesa-dri) ]; then 
+if [ ! dpkg --list | grep -q libgl1-mesa-dri ]; then 
     kodi-send --action="Notification(Downloading and installing Steamlink depenancies (libgl1-mesa-dri)... ,3000)" 
     sudo apt install libgl1-mesa-dri -y 
 fi
