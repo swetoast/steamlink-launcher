@@ -46,8 +46,6 @@ Here is a list of people that donated to this project, super thankful for people
 
 this makes it less spammy on the issue tracker with OSMC issues again this launcher does very little on a OS level all it does is starts steamlink.
 
-### Known issues:
-
 When reporting a bug please prodvide logs this can be done via commandline `grab-logs -A` 
 
 if these fixes are out of date and its working report back on the tracker.
