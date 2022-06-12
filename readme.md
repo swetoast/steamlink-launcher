@@ -52,6 +52,8 @@ When reporting a bug please prodvide logs this can be done via commandline `grab
 
 if these fixes are out of date and its working report back on the tracker.
 
+Known Workarounds:
+
 * if you get black screen in 4k, you need `dtoverlay=vc4-fkms-v3d,cma-512` instead of `dtoverlay=vc4-kms-v3d` in `onfig.txt` .
 
 ## License
