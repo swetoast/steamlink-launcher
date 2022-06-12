@@ -48,19 +48,11 @@ this makes it less spammy on the issue tracker with OSMC issues again this launc
 
 Known issues:
 
-if you get black screen in 4k, you need dtoverlay=vc4-fkms-v3d,cma-512 in config.txt instead of dtoverlay=vc4-kms-v3d.
-
 When reporting a bug please prodvide logs this can be done via commandline `grab-logs -A` 
 
 if these fixes are out of date and its working report back on the tracker.
 
-RPI4 crashes in kernel with error message: `vc4_hdmi fef05700.hdmi: ASoC: error at snd_soc_dai_startup on fef05700.hdmi`
-
-if Steamlink complains about memory either edit in OSMC addon configuration or via ssh then type this `sudo nano /boot/config.txt` and then add or replace:
-```
-gpu_mem=128
-```
-Source: https://steamcommunity.com/app/353380/discussions/6/3193611900710760046/#c4328520278444207948
+* if you get black screen in 4k, you need `dtoverlay=vc4-fkms-v3d,cma-512` instead of `dtoverlay=vc4-kms-v3d` in `onfig.txt` .
 
 ## License
 
