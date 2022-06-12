@@ -46,13 +46,13 @@ Here is a list of people that donated to this project, super thankful for people
 
 this makes it less spammy on the issue tracker with OSMC issues again this launcher does very little on a OS level all it does is starts steamlink.
 
-Known issues:
+### Known issues:
 
 When reporting a bug please prodvide logs this can be done via commandline `grab-logs -A` 
 
 if these fixes are out of date and its working report back on the tracker.
 
-Known Workarounds:
+### Known Workarounds:
 
 * if you get black screen in 4k, you need `dtoverlay=vc4-fkms-v3d,cma-512` instead of `dtoverlay=vc4-kms-v3d` in `onfig.txt` .
 
