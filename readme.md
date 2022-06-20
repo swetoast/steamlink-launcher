@@ -56,7 +56,7 @@ if these fixes are out of date and its working report back on the tracker.
 
 ### Known Workarounds:
 
-* if you get black screen in 4k (RPI4), you need `dtoverlay=vc4-fkms-v3d,cma-512` instead of `dtoverlay=vc4-kms-v3d` in `config.txt` .
+* if you get a black stream from your Steam host, you need `dtoverlay=vc4-fkms-v3d,cma-512` instead of `dtoverlay=vc4-kms-v3d` in `config.txt` .
 
 ## License
 
