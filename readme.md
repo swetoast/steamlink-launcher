@@ -24,7 +24,7 @@ Make sure to lint your code so its proper then submit it via PR here on the trac
 
 ## Acknowledgement
 
-© 2022 Valve Corporation. All rights reserved. Valve, Steam Link and Steam are trademarks and/or 
+© 2023 Valve Corporation. All rights reserved. Valve, Steam Link and Steam are trademarks and/or 
 registered trademarks of Valve Corporation in the US and other countries. 
 
 ## Credits
