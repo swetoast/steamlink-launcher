@@ -9,7 +9,7 @@
 
 
 
-This is a laucher only for Open Source Mediacenter (OSMC), the launcher installs two scripts that run and handles Steamlink remember this is all beta so report performance issues to Valve and launcher issues here, i will not handle performance issues at all will refer to Valve for that.
+This is a laucher only for Open Source Mediacenter (OSMC), the launcher installs two scripts that run and handles Steamlink, remember this is all beta so report performance issues to Valve and launcher issues here, i will not handle performance issues at all will refer to Valve for that.
 
 ## Installation
 
