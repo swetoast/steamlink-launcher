@@ -31,37 +31,39 @@ sudo su -c "nohup sudo openvt -c 7 -s -f -l /tmp/steamlink-watchdog.sh >/dev/nul
         outfile.close()
     with open('/tmp/steamlink-watchdog.sh', 'w') as outfile:
         outfile.write("""#!/bin/bash
-        sudo apt update # write a better update check
-if ! dpkg --list | grep -q gnupg; then 
-   kodi-send --action="Notification(Downloading and installing Steamlink dependencies (gnupg)... ,3000)"
-   sudo apt install gnupg -y
+        
+check_pkgs_installed() {
+	output=$(dpkg --list $@ 2>&1)
+}
+
+req_packages="gnupg curl libgles2 libegl1 libgl1-mesa-dri"
+
+if ! check_pkgs_installed $req_packages; then        
+	sudo apt update
+	for pkg in $req_packages; do
+	
+		if ! check_pkgs_installed $pkg; then 
+			kodi-send --action="Notification(Downloading and installing Steamlink dependencies ($pkg)... ,3000)"
+			sudo apt install $pkg -y
+		fi
+	done
 fi
-if ! dpkg --list | grep -q curl; then 
-    kodi-send --action="Notification(Downloading and installing Steamlink dependencies (curl)... ,3000)" 
-    sudo apt install curl -y 
-fi
-if ! dpkg --list | grep -q libgles2; then 
-    kodi-send --action="Notification(Downloading and installing Steamlink dependencies (libgles2)... ,3000)" 
-    sudo apt install libgles2 -y 
-fi
-if ! dpkg --list | grep -q libegl1; then 
-    kodi-send --action="Notification(Downloading and installing Steamlink dependencies (libegl1)... ,3000)" 
-    sudo apt install libegl1 -y 
-fi
-if ! dpkg --list | grep -q libgl1-mesa-dri; then 
-    kodi-send --action="Notification(Downloading and installing Steamlink dependencies (libgl1-mesa-dri)... ,3000)" 
-    sudo apt install libgl1-mesa-dri -y 
-fi
+
 if [ "$(which steamlink)" = "" ]; then
     kodi-send --action="Notification(Downloading and installing Steamlink Application... ,3000)" 
     curl -o /tmp/steamlink.deb -#Of http://media.steampowered.com/steamlink/rpi/latest/steamlink.deb
     sudo dpkg -i /tmp/steamlink.deb
     rm -f /tmp/steamlink.deb
 fi
-if [ -f "/home/osmc/.wakeup" ] 
-   then /usr/bin/wakeonlan "$(cat "/home/osmc/.wakeup")"
-   else sudo apt install wakeonlan -y; /usr/bin/wakeonlan "$(cat "/home/osmc/.wakeup")" 
+
+if [ -f "/home/osmc/.wakeup" ]; then
+	if ! check_pkgs_installed wakeonlan; then
+		sudo apt install wakeonlan -y;
+	fi
+   
+   /usr/bin/wakeonlan "$(cat "/home/osmc/.wakeup")"
 fi
+
 if [ -x "/home/osmc/steamlink/startup.sh" ]
    then sudo -u osmc /home/osmc/steamlink/startup.sh
 fi
