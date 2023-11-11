@@ -62,10 +62,19 @@ if [ -f "/home/osmc/.wakeup" ]
    then /usr/bin/wakeonlan "$(cat "/home/osmc/.wakeup")"
    else sudo apt install wakeonlan -y; /usr/bin/wakeonlan "$(cat "/home/osmc/.wakeup")" 
 fi
+if [ -x "/home/osmc/steamlink/startup.sh" ]
+   then sudo -u osmc /home/osmc/steamlink/startup.sh
+fi
+
 systemctl stop mediacenter
 if [ "$(systemctl is-active hyperion.service)" = "active" ]; then systemctl restart hyperion; fi
 sudo -u osmc steamlink
 openvt -c 7 -s -f clear
+
+if [ -x "/home/osmc/steamlink/shutdown.sh" ]
+   then sudo -u osmc /home/osmc/steamlink/shutdown.sh
+fi
+
 systemctl start mediacenter
 """)
         outfile.close()
