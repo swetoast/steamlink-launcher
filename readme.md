@@ -35,6 +35,7 @@ Here is a full list of people that helped out on this project
 * [Valve/Slouken](https://github.com/swetoast/steamlink-launcher/commits?author=slouken) - for additional code donations and for adding lib replacement for OSMC
 * [sgroen88](https://github.com/sgroen88) - adding shell execution to the script
 * [ninfur](https://github.com/ninfur) - fixing the watchdog
+* [Sam Crawley](https://github.com/sam-crawley) - watchdog rewrite 
 
 ## Donator
 
