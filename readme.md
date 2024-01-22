@@ -15,6 +15,7 @@ This launcher is exclusively designed for the Open Source Media Center (OSMC). I
 
 1. Download the [zip](https://github.com/swetoast/steamlink-launcher/releases) file of the launcher and install it using Kodi.
 2. The add-on will automatically install Steamlink. If wakeuponlan is installed, it is also supported. To use it, create a file in the home directory named `.wakeup` and add your MAC ID using the command `nano /home/osmc/.wakeup`.
+   
 NOTE: Please note that this add-on requires Kodi version 19 to be installed as it uses Python 3.
 
 ## Want to contribute
