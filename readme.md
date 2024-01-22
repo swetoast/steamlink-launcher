@@ -9,7 +9,7 @@
 
 
 
-This is a laucher only for Open Source Mediacenter (OSMC), the launcher installs two scripts that run and handles Steamlink, remember this is all beta so report performance issues to Valve and launcher issues here, i will not handle performance issues at all will refer to Valve for that.
+This launcher is exclusively designed for the Open Source Media Center (OSMC). It facilitates the installation of two scripts that operate and manage Steamlink. Please note that this is still in beta testing, so any performance-related issues should be reported directly to Valve. While I'm here to address issues related to the launcher, I won't be able to assist with performance problems - these should be directed to Valve.
 
 ## Installation
 
@@ -45,15 +45,13 @@ Here is a list of people that donated to this project, super thankful for people
 
 ## Got issues
 
-* if the bug is related to the launcher, file an issue
-* if its related to OSMC like crashing the pi adding overlays etc start a thread on OSMC Forums.
-* if steamlink launches but there are issues then go to [Steam Forums](https://steamcommunity.com/app/353380/discussions/) for support.
-
-this makes it less spammy on the issue tracker with OSMC issues again this launcher does very little on a OS level all it does is starts steamlink.
-
-When reporting a bug please prodvide logs this can be done via commandline `grab-logs -A` 
-
-if these fixes are out of date and its working report back on the tracker.
+* If you encounter a bug associated with the launcher, please submit an issue.
+* If you experience problems related to OSMC, such as the Pi crashing or issues with overlays, initiate a discussion on the OSMC Forums.
+* If Steamlink starts but you’re facing difficulties, seek support on the [Steam Forums](https://steamcommunity.com/app/353380/discussions/).
+* 
+To minimize clutter on the issue tracker with OSMC-related issues, please remember that this launcher primarily initiates Steamlink and has minimal interaction with the operating system.
+When reporting a bug, it's crucial to include logs. You can obtain these via the command line using `grab-logs -A`.
+If you find that these fixes are outdated but everything is functioning correctly, please provide an update on the issue tracker.
 
 ### Known Workarounds:
 
