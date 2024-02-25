@@ -36,6 +36,13 @@ def install_package(package):
         # Close the progress dialog
         progress_dialog.close()
 
+def is_steamlink_installed():
+    try:
+        subprocess.run(["dpkg", "-s", "steamlink"], check=True)
+        return True
+    except subprocess.CalledProcessError:
+        return False
+
 def install_steamlink():
     try:
         # Custom download function with progress
@@ -51,6 +58,10 @@ def install_steamlink():
         # Install the Steamlink package
         subprocess.run(["sudo", "dpkg", "-i", "/tmp/steamlink.deb"], check=True)
         xbmcgui.Dialog().ok('Success', 'The Steamlink package has been installed successfully.')
+        
+        # Remove the Steamlink package from /tmp
+        os.remove("/tmp/steamlink.deb")
+        xbmcgui.Dialog().ok('Success', 'The Steamlink package has been removed from /tmp.')
     except Exception as e:
         xbmcgui.Dialog().ok('Error', f'An error occurred: {str(e)}')
 
@@ -59,7 +70,11 @@ for package in packages:
         xbmcgui.Dialog().ok('Missing Prerequisite', f'The package {package} is not installed. Installing now...')
         install_package(package)
 
-install_steamlink()
+if not is_steamlink_installed():
+    xbmcgui.Dialog().ok('Missing Prerequisite', 'Steamlink is not installed. Installing now...')
+    install_steamlink()
+else:
+    xbmcgui.Dialog().ok('Already Installed', 'Steamlink is already installed.')
 
 # Stop Kodi
 subprocess.run(["sudo", "systemctl", "stop", "mediacenter"], check=True)
