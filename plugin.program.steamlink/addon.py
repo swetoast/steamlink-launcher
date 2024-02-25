@@ -1,83 +1,72 @@
-"""Steamlink Launcher for OSMC"""
 import os
+import subprocess
 import xbmc
-import xbmcgui
 import xbmcaddon
+import xbmcgui
+import urllib.request
+import shutil
 
-__plugin__ = "steamlink"
-__author__ = "toast"
-__url__ = "https://github.com/swetoast/steamlink-launcher/"
-__git_url__ = "https://github.com/swetoast/steamlink-launcher/"
-__credits__ = "toast"
-__version__ = "0.0.13"
+addon = xbmcaddon.Addon()
 
-dialog = xbmcgui.Dialog()
-addon = xbmcaddon.Addon(id='plugin.program.steamlink')
+# Path to the Steamlink deb package
+steamlink_url = "http://media.steampowered.com/steamlink/rpi/latest/steamlink.deb"
 
-def main():
-    """Main operations of this plugin."""
-    create_files()
-    output = os.popen("sh /tmp/steamlink-launcher.sh").read()
-    dialog.ok("Starting Steamlink...", output)
+# List of prerequisite packages
+packages = ["gnupg", "curl", "libgles2", "libegl1", "libgl1-mesa-dri"]
 
-def create_files():
-    """Creates bash files to be used for this plugin."""
-    with open('/tmp/steamlink-launcher.sh', 'w') as outfile:
-        outfile.write("""#!/bin/bash
-chmod 755 /tmp/steamlink-watchdog.sh
-sudo openvt -c 7 -s -f clear
-sudo su -c "nohup sudo openvt -c 7 -s -f -l /tmp/steamlink-watchdog.sh >/dev/null 2>&1 &"
-""")
-        outfile.close()
-    with open('/tmp/steamlink-watchdog.sh', 'w') as outfile:
-        outfile.write("""#!/bin/bash
+def is_installed(package):
+    try:
+        subprocess.run(["dpkg", "-s", package], check=True)
+        return True
+    except subprocess.CalledProcessError:
+        return False
+
+def install_package(package):
+    # Create a progress dialog
+    progress_dialog = xbmcgui.DialogProgress()
+    progress_dialog.create(f'Installing {package}', 'Please wait...')
+    
+    try:
+        # Install the package
+        subprocess.run(["sudo", "apt-get", "install", "-y", package], check=True)
+        xbmcgui.Dialog().ok('Success', f'The package {package} has been installed successfully.')
+    except subprocess.CalledProcessError:
+        xbmcgui.Dialog().ok('Error', f'An error occurred while installing the package {package}.')
+    finally:
+        # Close the progress dialog
+        progress_dialog.close()
+
+def install_steamlink():
+    try:
+        # Custom download function with progress
+        def download_with_progress(url, dest):
+            with urllib.request.urlopen(url) as response, open(dest, 'wb') as out_file:
+                shutil.copyfileobj(response, out_file)
+                print(f"Downloaded {os.path.getsize(dest)} bytes")
+
+        # Download the Steamlink package
+        download_with_progress(steamlink_url, "/tmp/steamlink.deb")
+        xbmcgui.Dialog().ok('Success', 'The Steamlink package has been downloaded successfully.')
         
-check_pkgs_installed() {
-	output=$(dpkg --list $@ 2>&1)
-}
+        # Install the Steamlink package
+        subprocess.run(["sudo", "dpkg", "-i", "/tmp/steamlink.deb"], check=True)
+        xbmcgui.Dialog().ok('Success', 'The Steamlink package has been installed successfully.')
+    except Exception as e:
+        xbmcgui.Dialog().ok('Error', f'An error occurred: {str(e)}')
 
-req_packages="gnupg curl libgles2 libegl1 libgl1-mesa-dri"
+for package in packages:
+    if not is_installed(package):
+        xbmcgui.Dialog().ok('Missing Prerequisite', f'The package {package} is not installed. Installing now...')
+        install_package(package)
 
-if ! check_pkgs_installed $req_packages; then        
-	sudo apt update
-	for pkg in $req_packages; do
-	
-		if ! check_pkgs_installed $pkg; then 
-			kodi-send --action="Notification(Downloading and installing Steamlink dependencies ($pkg)... ,3000)"
-			sudo apt install $pkg -y
-		fi
-	done
-fi
+install_steamlink()
 
-if [ "$(which steamlink)" = "" ]; then
-    kodi-send --action="Notification(Downloading and installing Steamlink Application... ,3000)" 
-    curl -o /tmp/steamlink.deb -#Of http://media.steampowered.com/steamlink/rpi/latest/steamlink.deb
-    sudo dpkg -i /tmp/steamlink.deb
-    rm -f /tmp/steamlink.deb
-fi
+# Stop Kodi
+subprocess.run(["sudo", "systemctl", "stop", "mediacenter"], check=True)
 
-if [ -f "/home/osmc/.wakeup" ]; then
-	if ! check_pkgs_installed wakeonlan; then
-		sudo apt install wakeonlan -y;
-	fi
-   
-   /usr/bin/wakeonlan "$(cat "/home/osmc/.wakeup")"
-fi
+# Launch Steamlink
+subprocess.run(["sudo", "-u", "osmc", "steamlink"], check=True)
+subprocess.run(["openvt", "-c", "7", "-s", "-f", "clear"], check=True)
 
-if [ -x "/home/osmc/steamlink/startup.sh" ]
-   then sudo -u osmc /home/osmc/steamlink/startup.sh
-fi
-
-systemctl stop mediacenter
-if [ "$(systemctl is-active hyperion.service)" = "active" ]; then systemctl restart hyperion; fi
-sudo -u osmc steamlink
-openvt -c 7 -s -f clear
-
-if [ -x "/home/osmc/steamlink/shutdown.sh" ]
-   then sudo -u osmc /home/osmc/steamlink/shutdown.sh
-fi
-
-systemctl start mediacenter
-""")
-        outfile.close()
-main()
+# Start Kodi
+subprocess.run(["sudo", "systemctl", "start", "mediacenter"], check=True)
