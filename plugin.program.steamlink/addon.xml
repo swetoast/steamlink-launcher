@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.steamlink" name="Steamlink Launcher" version="0.0.13" provider-name="Toast">
+<addon id="plugin.program.steamlink" name="Steamlink Launcher" version="0.1.1" provider-name="Toast">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
   </requires>
@@ -7,18 +7,18 @@
     <provides>executable</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en_GB">Steamlink for Kodi</summary>
-    <description lang="en_GB">Steamlink for Kodi</description>
-    <disclaimer lang="en_GB"></disclaimer>
-    <language>en</language> <!-- the language of the videos the plugin provides, may be left blank -->
+    <summary lang="en_GB">Launch Steamlink from Kodi</summary>
+    <description lang="en_GB">This add-on allows you to launch the Steamlink application directly from Kodi. It is designed for use on Linux systems.</description>
+    <disclaimer lang="en_GB">Use at your own risk. The author is not responsible for any issues that may arise from using this add-on.</disclaimer>
+    <language>en</language>
     <platform>linux</platform>
     <license>GPL-2.0</license>
-    <forum></forum> <!-- may be left blank  -->
-    <website>https://github.com/swetoast/steamlink-launcher/</website> <!-- the url of the website that contains the videos (or the official website of your plugin).  -->
-    <email></email> <!-- may be left blank  -->
+    <forum>https://forum.kodi.tv/</forum>
+    <website>https://github.com/swetoast/steamlink-launcher/</website>
+    <email></email>
     <source>https://github.com/swetoast/steamlink-launcher</source>
     <news>
-      Kodi 19.x update and additional update for OSMC
+      Updated for Kodi 19.x and added support for OSMC.
     </news>
     <assets>
         <icon>resources/icon.png</icon>
