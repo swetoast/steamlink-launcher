@@ -29,6 +29,7 @@ def install_package(package):
     try:
         # Install the package
         subprocess.run(["sudo", "apt-get", "install", "-y", package], check=True)
+        progress_dialog.update(100, f'Installing {package}', 'Installation complete.')
         xbmcgui.Dialog().ok('Success', f'The package {package} has been installed successfully.')
     except subprocess.CalledProcessError:
         xbmcgui.Dialog().ok('Error', f'An error occurred while installing the package {package}.')
@@ -44,11 +45,16 @@ def is_steamlink_installed():
         return False
 
 def install_steamlink():
+    # Create a progress dialog
+    progress_dialog = xbmcgui.DialogProgress()
+    progress_dialog.create('Installing Steamlink', 'Please wait...')
+    
     try:
         # Custom download function with progress
         def download_with_progress(url, dest):
             with urllib.request.urlopen(url) as response, open(dest, 'wb') as out_file:
                 shutil.copyfileobj(response, out_file)
+                progress_dialog.update(50, 'Installing Steamlink', 'Download complete.')
                 print(f"Downloaded {os.path.getsize(dest)} bytes")
 
         # Download the Steamlink package
@@ -57,6 +63,7 @@ def install_steamlink():
         
         # Install the Steamlink package
         subprocess.run(["sudo", "dpkg", "-i", "/tmp/steamlink.deb"], check=True)
+        progress_dialog.update(100, 'Installing Steamlink', 'Installation complete.')
         xbmcgui.Dialog().ok('Success', 'The Steamlink package has been installed successfully.')
         
         # Remove the Steamlink package from /tmp
@@ -64,6 +71,9 @@ def install_steamlink():
         xbmcgui.Dialog().ok('Success', 'The Steamlink package has been removed from /tmp.')
     except Exception as e:
         xbmcgui.Dialog().ok('Error', f'An error occurred: {str(e)}')
+    finally:
+        # Close the progress dialog
+        progress_dialog.close()
 
 for package in packages:
     if not is_installed(package):
