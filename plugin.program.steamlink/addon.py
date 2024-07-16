@@ -22,7 +22,7 @@ class Installer:
 
     def install_package(self, package):
         # Create a progress dialog
-        progress_dialog = xbmcgui.DialogProgress()
+        progress_dialog = xbmcgui.DialogProgressBG()
         progress_dialog.create(f'Installing {package}', 'Please wait...')
         
         try:
@@ -38,19 +38,16 @@ class Installer:
 
     def install_steamlink(self):
         # Create a progress dialog
-        progress_dialog = xbmcgui.DialogProgress()
+        progress_dialog = xbmcgui.DialogProgressBG()
         progress_dialog.create('Installing Steamlink', 'Please wait...')
         
         try:
-            # Custom download function with progress
-            def download_with_progress(url, dest):
-                with urllib.request.urlopen(url) as response, open(dest, 'wb') as out_file:
-                    shutil.copyfileobj(response, out_file)
-                    progress_dialog.update(50, 'Installing Steamlink', 'Download complete.')
-                    print(f"Downloaded {os.path.getsize(dest)} bytes")
-
             # Download the Steamlink package
-            download_with_progress(STEAMLINK_URL, "/tmp/steamlink.deb")
+            urllib.request.urlretrieve(STEAMLINK_URL, "/tmp/steamlink.deb",
+                                       lambda num_blocks, block_size, total_size: progress_dialog.update(
+                                           50 * num_blocks * block_size / total_size,
+                                           'Installing Steamlink',
+                                           'Download complete.'))
             xbmcgui.Dialog().ok('Success', 'The Steamlink package has been downloaded successfully.')
             
             # Install the Steamlink package
